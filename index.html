@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maqueta de inicio de sesión</title>
+<style>
+  :root { --ink:#292929; --line:#252525; --muted:#d9dadd; --accent:#72cbd0; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; padding:26px 12px;
+    background:#f5f5f5; color:var(--ink);
+    font-family:Arial, Helvetica, sans-serif;
+    display:flex; justify-content:center; align-items:center;
+  }
+  .top-accent {
+    position:fixed; top:0; left:2.5%; width:95%; height:9px;
+    background:#d9f1f2; border:2px solid var(--accent);
+    border-top:0; border-radius:0 0 18px 18px;
+  }
+  .login-card {
+    width:min(100%, 760px); background:#fff; border-radius:22px;
+    padding:58px 54px 42px; box-shadow:0 9px 24px rgba(0,0,0,.12);
+    border:1px solid #f0f0f0;
+  }
+  h1 { margin:0 0 30px; text-align:center; font-size:clamp(34px,5vw,46px); font-weight:700; }
+  .intro { margin:0 auto 76px; text-align:center; font-size:clamp(21px,3.5vw,31px); line-height:1.48; max-width:620px; }
+  .field { margin-bottom:18px; }
+  .input-wrap {
+    display:flex; align-items:center; gap:18px; min-height:66px;
+    border-bottom:2px solid var(--line); padding:0 6px 7px;
+  }
+  .input-wrap svg { width:38px; height:42px; flex:0 0 38px; stroke:currentColor; fill:none; stroke-width:1.65; }
+  .input-wrap input {
+    border:0; outline:0; background:transparent; width:100%; min-width:0;
+    font:inherit; font-size:clamp(23px,3.8vw,31px); color:var(--ink);
+  }
+  .input-wrap input::placeholder { color:#303030; opacity:1; }
+  .help-link { display:inline-block; margin-top:25px; color:var(--ink); font-size:clamp(17px,2.8vw,22px); font-weight:700; text-decoration:underline; }
+  .field + .field { margin-top:55px; }
+  .submit {
+    width:100%; border:0; border-radius:60px; min-height:100px; margin-top:94px;
+    background:var(--muted); color:#999; font-size:clamp(25px,4vw,34px); font-weight:700;
+    cursor:not-allowed; transition:background .2s,color .2s;
+  }
+  .submit.ready { background:#d9f1f2; color:#252525; cursor:pointer; }
+  .create { display:block; text-align:center; margin-top:57px; color:var(--ink); font-size:clamp(21px,3.2vw,27px); font-weight:700; text-decoration:underline; }
+  .notice { display:none; margin:20px 0 0; padding:12px 14px; background:#f2fbfb; border:1px solid #b7e2e4; border-radius:10px; line-height:1.45; }
+  .notice.show { display:block; }
+  @media (max-width:600px) {
+    body { padding:20px 7px; align-items:flex-start; }
+    .login-card { padding:42px 24px 34px; border-radius:18px; margin-top:18px; }
+    .intro { margin-bottom:54px; }
+    .input-wrap { gap:13px; min-height:60px; }
+    .input-wrap svg { width:32px; height:36px; flex-basis:32px; }
+    .field + .field { margin-top:42px; }
+    .submit { min-height:78px; margin-top:65px; }
+    .create { margin-top:42px; }
+  }
+</style>
+</head>
+<body>
+<div class="top-accent" aria-hidden="true"></div>
+<main class="login-card">
+  <h1>¡Hola!</h1>
+  <p class="intro">Ingresa los datos para gestionar tus productos y hacer transacciones.</p>
+
+  <form id="demoForm" autocomplete="off">
+    <div class="field">
+      <label class="input-wrap" for="usuario">
+        <svg viewBox="0 0 40 44" aria-hidden="true"><circle cx="20" cy="12" r="8"></circle><path d="M5 39v-4c0-7 6-11 15-11s15 4 15 11v4z"></path></svg>
+        <input id="usuario" name="usuario" type="text" placeholder="Usuario" aria-label="Usuario">
+      </label>
+      <a class="help-link" href="#ayuda-usuario" data-message="Esta es una maqueta. La recuperación de usuario no está conectada a ningún servicio.">¿Olvidaste tu usuario?</a>
+    </div>
+
+    <div class="field">
+      <label class="input-wrap" for="clave">
+        <svg viewBox="0 0 40 44" aria-hidden="true"><rect x="7" y="18" width="26" height="23" rx="8"></rect><path d="M11 18V12a9 9 0 0 1 18 0v6"></path><circle cx="20" cy="28" r="2.5"></circle><path d="M20 30.5v4"></path></svg>
+        <input id="clave" name="clave" type="password" placeholder="Clave del cajero" aria-label="Clave de demostración">
+      </label>
+      <a class="help-link" href="#ayuda-clave" data-message="Esta es una maqueta. La recuperación o desbloqueo de clave no está conectado a ningún servicio.">¿Olvidaste o bloqueaste tu clave?</a>
+    </div>
+
+    <button class="submit" id="submitBtn" type="submit" disabled>Iniciar sesión</button>
+    <p class="notice" id="notice" role="status"></p>
+  </form>
+  <a class="create" href="#crear" id="createLink">Crear usuario</a>
+</main>
+<script>
+  // Demo visual local: no se envían ni guardan los valores ingresados.
+  const usuario = document.getElementById('usuario');
+  const clave = document.getElementById('clave');
+  const submitBtn = document.getElementById('submitBtn');
+  const notice = document.getElementById('notice');
+  function actualizarBoton() {
+    const listo = usuario.value.trim().length > 0 && clave.value.trim().length > 0;
+    submitBtn.disabled = !listo;
+    submitBtn.classList.toggle('ready', listo);
+  }
+  function mostrarAviso(texto) {
+    notice.textContent = texto;
+    notice.classList.add('show');
+  }
+  usuario.addEventListener('input', actualizarBoton);
+  clave.addEventListener('input', actualizarBoton);
+  document.getElementById('demoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    mostrarAviso('Demostración local: el inicio de sesión no está conectado y no se enviaron datos.');
+  });
+  document.querySelectorAll('[data-message]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      mostrarAviso(this.dataset.message);
+    });
+  });
+  document.getElementById('createLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    mostrarAviso('Demostración local: el registro de usuario no está conectado.');
+  });
+</script>
+</body>
+</html>
