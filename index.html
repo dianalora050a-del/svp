@@ -1,212 +1,452 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f5f5">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maqueta de inicio de sesión</title>
+
 <style>
-  :root {
-    --ink: #292929;
-    --line: #252525;
-    --button-bg: #d9dadd;
-    --button-text: #77787b;
-    --accent: #72cbd0;
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
+:root {
+    --fondo: #f5f5f5;
+    --texto: #292929;
+    --gris: #d9dadd;
+    --amarillo: #ffdf00;
+    --turquesa: #72cbd0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
     margin: 0;
     min-height: 100vh;
     min-height: 100dvh;
     padding: 22px 14px;
-    background: #f5f5f5;
-    color: var(--ink);
+    background: var(--fondo);
+    color: var(--texto);
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .top-accent {
-    position: fixed; z-index: 1; top: 0; left: 2.5%;
-    width: 95%; height: 8px;
+}
+
+/* Línea superior */
+.top-accent {
+    position: fixed;
+    top: 0;
+    left: 2.5%;
+    width: 95%;
+    height: 8px;
     background: #d9f1f2;
-    border: 2px solid var(--accent); border-top: 0;
+    border: 2px solid var(--turquesa);
+    border-top: 0;
     border-radius: 0 0 18px 18px;
-  }
-  .login-card {
+}
+
+/* Tarjeta principal */
+.login-card {
     width: 100%;
     max-width: 570px;
+    padding: clamp(28px, 5vw, 46px)
+             clamp(22px, 5.5vw, 42px) 32px;
     background: #fff;
     border: 1px solid #f0f0f0;
     border-radius: 20px;
-    padding: clamp(28px, 5vw, 46px) clamp(22px, 5.5vw, 42px) 32px;
     box-shadow: 0 8px 22px rgba(0,0,0,.10);
-  }
-  h1 {
+}
+
+h1 {
     margin: 0 0 18px;
     text-align: center;
     font-size: clamp(28px, 4vw, 38px);
     line-height: 1.2;
-    font-weight: 700;
-  }
-  .intro {
+}
+
+.intro {
     max-width: 460px;
     margin: 0 auto clamp(38px, 6vw, 58px);
     text-align: center;
     font-size: clamp(17px, 2.4vw, 24px);
     line-height: 1.45;
-  }
-  .field { margin: 0; }
-  .input-wrap {
-    display: flex; align-items: center; gap: 13px;
+}
+
+/* Campos */
+.field {
+    margin: 0;
+}
+
+.input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 13px;
     min-height: 54px;
     padding: 0 4px 7px;
-    border-bottom: 1.5px solid var(--line);
-  }
-  .input-wrap svg {
-    width: 29px; height: 34px; flex: 0 0 29px;
-    stroke: currentColor; fill: none; stroke-width: 1.65;
-  }
-  .input-wrap input {
-    display: block; width: 100%; min-width: 0;
-    padding: 5px 0; border: 0; outline: 0;
-    background: transparent; box-shadow: none;
-    font: inherit; font-size: clamp(18px, 2.5vw, 25px);
-    color: var(--ink); border-radius: 0;
-  }
-  .input-wrap input::placeholder { color: #303030; opacity: 1; }
-  .input-wrap input:focus { outline: none; }
-  .help-link {
-    display: inline-block; margin-top: 17px;
-    color: var(--ink); font-size: clamp(14px, 1.9vw, 18px);
-    line-height: 1.35; font-weight: 700; text-decoration: underline;
-  }
-  .field + .field { margin-top: clamp(32px, 5vw, 46px); }
+    border-bottom: 1.5px solid #252525;
+}
 
-  .submit {
-    appearance: none; -webkit-appearance: none;
-    display: block; width: 100%;
-    min-height: 68px; margin-top: clamp(42px, 6vw, 58px);
+.input-wrap svg {
+    width: 29px;
+    height: 34px;
+    flex: 0 0 29px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.65;
+}
+
+.input-wrap input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 5px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: clamp(18px, 2.5vw, 25px);
+    color: var(--texto);
+}
+
+.input-wrap input::placeholder {
+    color: #303030;
+    opacity: 1;
+}
+
+.help-link {
+    display: inline-block;
+    margin-top: 17px;
+    color: var(--texto);
+    font-size: clamp(14px, 1.9vw, 18px);
+    line-height: 1.35;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.field + .field {
+    margin-top: clamp(32px, 5vw, 46px);
+}
+
+/* Botón de inicio */
+.submit {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    min-height: 68px;
+    margin-top: clamp(42px, 6vw, 58px);
     padding: 13px 18px;
-    border: 0; border-radius: 50px;
-    background-color: var(--button-bg) !important;
+    border: 0;
+    border-radius: 50px;
+    background: var(--gris) !important;
     background-image: none !important;
-    color: var(--button-text) !important;
-    font-family: inherit; font-size: clamp(19px, 2.7vw, 26px);
-    font-weight: 700; line-height: 1.2;
+    color: #77787b !important;
+    font-family: inherit;
+    font-size: clamp(19px, 2.7vw, 26px);
+    font-weight: 700;
+    line-height: 1.2;
     cursor: not-allowed;
     opacity: 1;
-    transition: filter .15s ease;
-  }
-  /* Al habilitarse, conserva el gris de la referencia: no cambia a amarillo. */
-  .submit.ready { cursor: pointer; }
-  .submit.ready:hover { filter: brightness(.97); }
-  .submit:focus-visible { outline: 2px solid #777; outline-offset: 3px; }
-  .create {
-    display: block; text-align: center;
-    margin-top: clamp(30px, 4.5vw, 42px);
-    color: var(--ink); font-size: clamp(17px, 2.3vw, 22px);
-    line-height: 1.35; font-weight: 700; text-decoration: underline;
-  }
-  .notice {
-    display: none; margin: 16px 0 0; padding: 11px 12px;
-    background: #f4f8f8; border: 1px solid #c8e4e5;
-    border-radius: 9px; font-size: 14px; line-height: 1.45;
-  }
-  .notice.show { display: block; }
+    transition: background-color .2s ease;
+}
 
-  @media (max-width: 480px) {
+/* Amarillo cuando los campos cumplen las condiciones */
+.submit.ready {
+    background: var(--amarillo) !important;
+    color: #292929 !important;
+    cursor: pointer;
+}
+
+.submit:focus-visible {
+    outline: 2px solid #777;
+    outline-offset: 3px;
+}
+
+.create {
+    display: block;
+    text-align: center;
+    margin-top: clamp(30px, 4.5vw, 42px);
+    color: var(--texto);
+    font-size: clamp(17px, 2.3vw, 22px);
+    line-height: 1.35;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* Avisos de demostración */
+.notice {
+    display: none;
+    margin: 16px 0 0;
+    padding: 11px 12px;
+    background: #f4f8f8;
+    border: 1px solid #c8e4e5;
+    border-radius: 9px;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.notice.show {
+    display: block;
+}
+
+/* Adaptación para teléfonos */
+@media (max-width: 480px) {
     body {
-      align-items: flex-start;
-      padding: max(18px, env(safe-area-inset-top)) 10px 18px;
+        align-items: flex-start;
+        padding: max(18px, env(safe-area-inset-top))
+                 10px 18px;
     }
+
     .login-card {
-      max-width: 390px;
-      margin: 10px auto 0;
-      padding: 30px 21px 27px;
-      border-radius: 16px;
+        max-width: 390px;
+        margin: 10px auto 0;
+        padding: 30px 21px 27px;
+        border-radius: 16px;
     }
-    h1 { font-size: 29px; margin-bottom: 15px; }
-    .intro { font-size: 17px; line-height: 1.45; margin-bottom: 39px; }
-    .input-wrap { min-height: 48px; gap: 11px; padding-bottom: 5px; }
-    .input-wrap svg { width: 26px; height: 30px; flex-basis: 26px; }
-    .input-wrap input { font-size: 18px; }
-    .help-link { margin-top: 14px; font-size: 14px; }
-    .field + .field { margin-top: 31px; }
-    .submit { min-height: 57px; margin-top: 42px; font-size: 19px; }
-    .create { margin-top: 30px; font-size: 18px; }
-  }
-  @media (max-width: 350px) {
-    body { padding-left: 7px; padding-right: 7px; }
-    .login-card { padding: 25px 16px 23px; }
-    .intro { font-size: 16px; }
-    .input-wrap input { font-size: 17px; }
-    .help-link { font-size: 13px; }
-  }
+
+    h1 {
+        font-size: 29px;
+        margin-bottom: 15px;
+    }
+
+    .intro {
+        font-size: 17px;
+        line-height: 1.45;
+        margin-bottom: 39px;
+    }
+
+    .input-wrap {
+        min-height: 48px;
+        gap: 11px;
+        padding-bottom: 5px;
+    }
+
+    .input-wrap svg {
+        width: 26px;
+        height: 30px;
+        flex-basis: 26px;
+    }
+
+    .input-wrap input {
+        font-size: 18px;
+    }
+
+    .help-link {
+        margin-top: 14px;
+        font-size: 14px;
+    }
+
+    .field + .field {
+        margin-top: 31px;
+    }
+
+    .submit {
+        min-height: 57px;
+        margin-top: 42px;
+        font-size: 19px;
+    }
+
+    .create {
+        margin-top: 30px;
+        font-size: 18px;
+    }
+}
+
+/* Teléfonos muy pequeños */
+@media (max-width: 350px) {
+    body {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .login-card {
+        padding: 25px 16px 23px;
+    }
+
+    .intro {
+        font-size: 16px;
+    }
+
+    .input-wrap input {
+        font-size: 17px;
+    }
+
+    .help-link {
+        font-size: 13px;
+    }
+}
 </style>
 </head>
+
 <body>
+
 <div class="top-accent" aria-hidden="true"></div>
+
 <main class="login-card">
-  <h1>¡Hola!</h1>
-  <p class="intro">Ingresa los datos para gestionar tus productos y hacer transacciones.</p>
 
-  <form id="demoForm" autocomplete="off">
-    <div class="field">
-      <label class="input-wrap" for="usuario">
-        <svg viewBox="0 0 40 44" aria-hidden="true"><circle cx="20" cy="12" r="8"></circle><path d="M5 39v-4c0-7 6-11 15-11s15 4 15 11v4z"></path></svg>
-        <input id="usuario" name="usuario" type="text" placeholder="Usuario" aria-label="Usuario">
-      </label>
-      <a class="help-link" href="#ayuda-usuario" data-message="Esta es una maqueta. La recuperación de usuario no está conectada a ningún servicio.">¿Olvidaste tu usuario?</a>
-    </div>
+    <h1>¡Hola!</h1>
 
-    <div class="field">
-      <label class="input-wrap" for="clave">
-        <svg viewBox="0 0 40 44" aria-hidden="true"><rect x="7" y="18" width="26" height="23" rx="8"></rect><path d="M11 18V12a9 9 0 0 1 18 0v6"></path><circle cx="20" cy="28" r="2.5"></circle><path d="M20 30.5v4"></path></svg>
-        <input id="clave" name="clave" type="password" placeholder="Clave del cajero" aria-label="Clave de demostración">
-      </label>
-      <a class="help-link" href="#ayuda-clave" data-message="Esta es una maqueta. La recuperación o desbloqueo de clave no está conectado a ningún servicio.">¿Olvidaste o bloqueaste tu clave?</a>
-    </div>
+    <p class="intro">
+        Ingresa los datos para gestionar tus productos
+        y hacer transacciones.
+    </p>
 
-    <button class="submit" id="submitBtn" type="submit" disabled>Iniciar sesión</button>
-    <p class="notice" id="notice" role="status"></p>
-  </form>
-  <a class="create" href="#crear" id="createLink">Crear usuario</a>
+    <form id="demoForm" autocomplete="off">
+
+        <!-- Usuario -->
+        <div class="field">
+
+            <label class="input-wrap" for="usuario">
+
+                <svg viewBox="0 0 40 44" aria-hidden="true">
+                    <circle cx="20" cy="12" r="8"></circle>
+                    <path d="M5 39v-4c0-7 6-11 15-11s15 4 15 11v4z"></path>
+                </svg>
+
+                <input
+                    id="usuario"
+                    type="text"
+                    placeholder="Usuario"
+                    aria-label="Usuario de demostración"
+                    autocomplete="off"
+                >
+
+            </label>
+
+            <a
+                class="help-link"
+                href="#ayuda-usuario"
+                data-message="La recuperación de usuario es solo una demostración local."
+            >
+                ¿Olvidaste tu usuario?
+            </a>
+
+        </div>
+
+        <!-- Clave ficticia de demostración -->
+        <div class="field">
+
+            <label class="input-wrap" for="clave">
+
+                <svg viewBox="0 0 40 44" aria-hidden="true">
+                    <rect x="7" y="18" width="26" height="23" rx="8"></rect>
+                    <path d="M11 18V12a9 9 0 0 1 18 0v6"></path>
+                    <circle cx="20" cy="28" r="2.5"></circle>
+                    <path d="M20 30.5v4"></path>
+                </svg>
+
+                <input
+                    id="clave"
+                    type="password"
+                    inputmode="numeric"
+                    pattern="[0-9]{4}"
+                    maxlength="4"
+                    placeholder="Clave de 4 dígitos"
+                    aria-label="Clave ficticia de demostración"
+                    autocomplete="off"
+                >
+
+            </label>
+
+            <a
+                class="help-link"
+                href="#ayuda-clave"
+                data-message="La recuperación o desbloqueo de clave es solo una demostración local."
+            >
+                ¿Olvidaste o bloqueaste tu clave?
+            </a>
+
+        </div>
+
+        <!-- Botón -->
+        <button
+            class="submit"
+            id="submitBtn"
+            type="submit"
+            disabled
+        >
+            Iniciar sesión
+        </button>
+
+        <p class="notice" id="notice" role="status"></p>
+
+    </form>
+
+    <a class="create" href="#crear" id="createLink">
+        Crear usuario
+    </a>
+
 </main>
+
 <script>
-  // Demostración local: no se envían ni guardan los valores escritos.
-  const usuario = document.getElementById('usuario');
-  const clave = document.getElementById('clave');
-  const submitBtn = document.getElementById('submitBtn');
-  const notice = document.getElementById('notice');
+const usuario = document.getElementById("usuario");
+const clave = document.getElementById("clave");
+const submitBtn = document.getElementById("submitBtn");
+const notice = document.getElementById("notice");
 
-  function actualizarBoton() {
-    const listo = usuario.value.trim().length > 0 && clave.value.trim().length > 0;
+/* Solo habilita el botón si hay usuario y cuatro dígitos */
+function actualizarBoton() {
+
+    const claveValida = /^\d{4}$/.test(clave.value);
+
+    const usuarioEscrito =
+        usuario.value.trim().length > 0;
+
+    const listo = usuarioEscrito && claveValida;
+
     submitBtn.disabled = !listo;
-    submitBtn.classList.toggle('ready', listo);
-  }
-  function mostrarAviso(texto) {
-    notice.textContent = texto;
-    notice.classList.add('show');
-  }
-  usuario.addEventListener('input', actualizarBoton);
-  clave.addEventListener('input', actualizarBoton);
 
-  document.getElementById('demoForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    mostrarAviso('Demostración local: el inicio de sesión no está conectado y no se enviaron datos.');
-  });
-  document.querySelectorAll('[data-message]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      mostrarAviso(this.dataset.message);
+    submitBtn.classList.toggle("ready", listo);
+}
+
+/* Permite escribir únicamente números en la clave */
+clave.addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "").slice(0, 4);
+    actualizarBoton();
+});
+
+usuario.addEventListener("input", actualizarBoton);
+
+/* Demostración local: no envía credenciales */
+function mostrarAviso(mensaje) {
+    notice.textContent = mensaje;
+    notice.classList.add("show");
+}
+
+document.getElementById("demoForm").addEventListener(
+    "submit",
+    function(event) {
+        event.preventDefault();
+
+        mostrarAviso(
+            "Demostración local: no se inició ninguna sesión " +
+            "ni se enviaron datos a un servidor."
+        );
+    }
+);
+
+document.querySelectorAll("[data-message]").forEach(function(link) {
+    link.addEventListener("click", function(event) {
+        event.preventDefault();
+        mostrarAviso(this.dataset.message);
     });
-  });
-  document.getElementById('createLink').addEventListener('click', function(e) {
-    e.preventDefault();
-    mostrarAviso('Demostración local: el registro de usuario no está conectado.');
-  });
+});
+
+document.getElementById("createLink").addEventListener(
+    "click",
+    function(event) {
+        event.preventDefault();
+
+        mostrarAviso(
+            "El registro de usuario es solo una demostración local."
+        );
+    }
+);
 </script>
+
 </body>
 </html>
