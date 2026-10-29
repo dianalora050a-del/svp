@@ -337,34 +337,19 @@ h1 {
   z-index: 10;
 }
 
-/* NUEVO: Reemplazo de la tarjeta rosada por el GIF/Banner Celeste */
-.gif-box {
-  background: #4cc9f0; /* Color celeste de tu imagen */
-  border-radius: 12px;
-  padding: 30px 20px; /* Espacio interno simulado */
-  text-align: center;
+/* CORREGIDO: Contenedor para la imagen GIF */
+.gif-container {
+  width: 100%;
   margin-bottom: 24px;
-  min-height: 150px; /* Altura aproximada para simular la imagen */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+  border-radius: 12px;
+  overflow: hidden; /* Para que la imagen respete el redondeado */
+  background: #4cc9f0; /* Color de fondo por si la imagen tarda en cargar o es transparente */
 }
 
-/* Texto simulado dentro del banner (puedes borrarlo si pones la imagen real) */
-.gif-box p {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-/* Si usas una imagen real, usa esta clase en lugar de .gif-box */
-.gif-box img {
-  max-width: 100%;
+.gif-container img {
+  width: 100%;
   height: auto;
-  border-radius: 8px;
+  display: block; /* Quita el espacio fantasma debajo de las imágenes */
 }
 
 .modal-title {
@@ -529,13 +514,6 @@ h1 {
   .modal-subtitle {
     font-size: 16px;
   }
-  .gif-box {
-    padding: 20px 15px;
-    min-height: 120px;
-  }
-  .gif-box p {
-    font-size: 16px;
-  }
 }
 </style>
 </head>
@@ -654,9 +632,10 @@ h1 {
   <div class="modal-content">
     <button class="modal-close" id="closeModal" aria-label="Cerrar">×</button>
     
-    <!-- NUEVO BANNER CELESTE (Reemplaza la tarjeta rosada) -->
-   <img src="cd-desktop.gif" alt="Instrucciones"> -->
-   
+    <!-- CORREGIDO: Imagen bien posicionada y estilizada -->
+    <div class="gif-container">
+      <img src="cd-desktop.gif" alt="Instrucciones Clave Dinámica">
+    </div>
 
     <h2 class="modal-title">Ingresa la Clave Dinámica</h2>
     <p class="modal-subtitle">Encuentra tu Clave Dinámica en la app Mi Bancolombia.</p>
