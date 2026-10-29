@@ -20,70 +20,73 @@
 body {
   margin: 0;
   min-height: 100vh;
-  padding: 26px 12px;
-  background: #f5f5f5;
+  padding: 20px 12px 30px;
+  background: #f7f7f7;
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
+/* Contenedor principal, con menor altura */
 .login-card {
   width: min(100%, 760px);
+  margin: 12px auto 0;
   background: #fff;
-  border-radius: 22px;
-  padding: 58px 54px 42px;
-  box-shadow: 0 9px 24px rgba(0,0,0,.12);
   border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  padding: 42px 48px 32px;
+  box-shadow: 0 9px 24px rgba(0, 0, 0, .12);
 }
 
 h1 {
-  margin: 0 0 30px;
+  margin: 0 0 24px;
   text-align: center;
-  font-size: clamp(34px, 5vw, 46px);
+  font-size: clamp(32px, 5vw, 44px);
   font-weight: 700;
 }
 
 .intro {
-  margin: 0 auto 76px;
+  max-width: 620px;
+  margin: 0 auto 56px;
   text-align: center;
   font-size: clamp(21px, 3.5vw, 31px);
-  line-height: 1.48;
-  max-width: 620px;
+  line-height: 1.45;
 }
 
 .field {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .input-wrap {
   display: flex;
   align-items: center;
-  gap: 18px;
-  min-height: 66px;
+  gap: 16px;
+  min-height: 58px;
+  padding: 0 6px 5px;
   border-bottom: 2px solid var(--line);
-  padding: 0 6px 7px;
+}
+
+.input-wrap:focus-within {
+  border-bottom-color: #555;
 }
 
 .input-wrap svg {
   width: 38px;
-  height: 42px;
+  height: 40px;
   flex: 0 0 38px;
-  stroke: currentColor;
   fill: none;
+  stroke: currentColor;
   stroke-width: 1.65;
 }
 
 .input-wrap input {
-  border: 0;
-  outline: 0;
-  background: transparent;
   width: 100%;
   min-width: 0;
-  font: inherit;
-  font-size: clamp(23px, 3.8vw, 31px);
+  border: 0;
+  outline: none;
+  background: transparent;
   color: var(--ink);
+  font-family: inherit;
+  font-size: clamp(22px, 3.8vw, 30px);
 }
 
 .input-wrap input::placeholder {
@@ -91,16 +94,13 @@ h1 {
   opacity: 1;
 }
 
-.input-wrap:focus-within {
-  border-bottom-color: #555;
-}
-
 .help-link {
   display: inline-block;
-  margin-top: 25px;
+  margin-top: 18px;
   color: var(--ink);
-  font-size: clamp(17px, 2.8vw, 22px);
+  font-size: clamp(16px, 2.8vw, 22px);
   font-weight: 700;
+  line-height: 1.35;
   text-decoration: underline;
 }
 
@@ -110,23 +110,28 @@ h1 {
 }
 
 .field + .field {
-  margin-top: 55px;
+  margin-top: 38px;
 }
 
+/* Botón desactivado */
 .submit {
+  display: block;
   width: 100%;
+  min-height: 78px;
+  margin-top: 68px;
+  padding: 12px 18px;
   border: 0;
   border-radius: 60px;
-  min-height: 100px;
-  margin-top: 94px;
   background: var(--muted);
-  color: #777;
-  font-size: clamp(25px, 4vw, 34px);
+  color: #888;
+  font-family: inherit;
+  font-size: clamp(24px, 4vw, 33px);
   font-weight: 700;
   cursor: not-allowed;
-  transition: background .2s, color .2s;
+  transition: background .2s ease, color .2s ease;
 }
 
+/* Botón amarillo al completar cuatro dígitos */
 .submit.ready {
   background: var(--yellow);
   color: #252525;
@@ -139,48 +144,75 @@ h1 {
 
 .create {
   display: block;
-  text-align: center;
-  margin-top: 57px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 40px auto 0;
   color: var(--ink);
-  font-size: clamp(21px, 3.2vw, 27px);
+  text-align: center;
+  font-size: clamp(20px, 3.2vw, 27px);
   font-weight: 700;
   text-decoration: underline;
 }
 
 .notice {
   display: none;
-  margin: 20px 0 0;
+  margin: 18px 0 0;
   padding: 12px 14px;
-  background: #f7f7f7;
   border: 1px solid #dedede;
   border-radius: 10px;
-  line-height: 1.45;
+  background: #f7f7f7;
   font-size: 14px;
+  line-height: 1.45;
 }
 
 .notice.show {
   display: block;
 }
 
+/* Enlaces debajo del contenedor */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin: 100px auto 25px;
+  text-align: center;
+}
+
+.footer-links a {
+  color: #333;
+  font-size: clamp(19px, 3vw, 27px);
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Ajustes para teléfonos */
 @media (max-width: 600px) {
   body {
-    padding: 20px 7px;
-    align-items: flex-start;
+    padding: 16px 7px 24px;
   }
 
   .login-card {
-    padding: 42px 24px 34px;
-    border-radius: 18px;
     margin-top: 18px;
+    padding: 36px 24px 28px;
+    border-radius: 18px;
+  }
+
+  h1 {
+    margin-bottom: 24px;
   }
 
   .intro {
-    margin-bottom: 54px;
+    margin-bottom: 48px;
   }
 
   .input-wrap {
+    min-height: 54px;
     gap: 13px;
-    min-height: 60px;
   }
 
   .input-wrap svg {
@@ -190,16 +222,40 @@ h1 {
   }
 
   .field + .field {
-    margin-top: 42px;
+    margin-top: 34px;
+  }
+
+  .help-link {
+    margin-top: 17px;
   }
 
   .submit {
-    min-height: 78px;
-    margin-top: 65px;
+    min-height: 72px;
+    margin-top: 58px;
   }
 
   .create {
-    margin-top: 42px;
+    margin-top: 34px;
+  }
+
+  .footer-links {
+    gap: 30px;
+    margin-top: 90px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-card {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .input-wrap {
+    gap: 10px;
+  }
+
+  .input-wrap input {
+    font-size: 21px;
   }
 }
 </style>
@@ -225,7 +281,6 @@ h1 {
 
         <input
           id="usuario"
-          name="usuario"
           type="text"
           placeholder="Usuario"
           aria-label="Usuario"
@@ -233,11 +288,10 @@ h1 {
         >
       </label>
 
-      <a
-        class="help-link"
-        href="#ayuda-usuario"
-        data-message="Demostración local: la recuperación de usuario no está conectada a ningún servicio."
-      >¿Olvidaste tu usuario?</a>
+      <a class="help-link" href="#ayuda-usuario"
+         data-message="Demostración local: esta opción no está conectada a ningún servicio.">
+        ¿Olvidaste tu usuario?
+      </a>
     </div>
 
     <div class="field">
@@ -251,22 +305,20 @@ h1 {
 
         <input
           id="clave"
-          name="clave"
           type="password"
           inputmode="numeric"
           maxlength="4"
           pattern="[0-9]{4}"
           placeholder="Clave del cajero"
-          aria-label="Clave de demostración de cuatro dígitos"
+          aria-label="Clave ficticia para demostración"
           autocomplete="off"
         >
       </label>
 
-      <a
-        class="help-link"
-        href="#ayuda-clave"
-        data-message="Demostración local: la recuperación o el desbloqueo de clave no están conectados a ningún servicio."
-      >¿Olvidaste o bloqueaste tu clave?</a>
+      <a class="help-link" href="#ayuda-clave"
+         data-message="Demostración local: la recuperación de clave no está conectada a ningún servicio.">
+        ¿Olvidaste o bloqueaste tu clave?
+      </a>
     </div>
 
     <button class="submit" id="submitBtn" type="submit" disabled>
@@ -274,7 +326,6 @@ h1 {
     </button>
 
     <p class="notice" id="notice" role="status"></p>
-
   </form>
 
   <a class="create" href="#crear" id="createLink">
@@ -282,28 +333,42 @@ h1 {
   </a>
 </main>
 
+<footer class="footer-links">
+  <a href="#conexion"
+     data-message="Demostración local: esta sección informativa no está conectada.">
+    ¿Problemas para conectarte?
+  </a>
+
+  <a href="#seguridad"
+     data-message="Demostración local: esta sección informativa no está conectada.">
+    Aprende sobre seguridad
+  </a>
+
+  <a href="#reglamento"
+     data-message="Demostración local: esta sección informativa no está conectada.">
+    Reglamento Sucursal Virtual
+  </a>
+</footer>
+
 <script>
-const usuario = document.getElementById("usuario");
 const clave = document.getElementById("clave");
 const submitBtn = document.getElementById("submitBtn");
 const notice = document.getElementById("notice");
 const demoForm = document.getElementById("demoForm");
 
 function actualizarBoton() {
-  // El botón depende únicamente de que haya exactamente cuatro dígitos.
   const claveCompleta = /^[0-9]{4}$/.test(clave.value);
 
   submitBtn.disabled = !claveCompleta;
   submitBtn.classList.toggle("ready", claveCompleta);
 }
 
-function mostrarAviso(texto) {
-  notice.textContent = texto;
+function mostrarAviso(mensaje) {
+  notice.textContent = mensaje;
   notice.classList.add("show");
 }
 
 clave.addEventListener("input", function() {
-  // Permite números y conserva ceros iniciales, como 0123.
   clave.value = clave.value.replace(/[^0-9]/g, "").slice(0, 4);
   actualizarBoton();
 });
@@ -312,12 +377,12 @@ demoForm.addEventListener("submit", function(event) {
   event.preventDefault();
 
   mostrarAviso(
-    "Demostración local: el inicio de sesión no está conectado y no se enviaron datos."
+    "Maqueta de demostración: no se ha iniciado sesión ni enviado información."
   );
 });
 
-document.querySelectorAll("[data-message]").forEach(function(link) {
-  link.addEventListener("click", function(event) {
+document.querySelectorAll("[data-message]").forEach(function(enlace) {
+  enlace.addEventListener("click", function(event) {
     event.preventDefault();
     mostrarAviso(this.dataset.message);
   });
@@ -331,7 +396,6 @@ document.getElementById("createLink").addEventListener("click", function(event) 
   );
 });
 
-// Comprueba el estado inicial del botón.
 actualizarBoton();
 </script>
 
