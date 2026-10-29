@@ -1,358 +1,353 @@
-`html
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iniciar sesión</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maqueta de inicio de sesión</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+:root {
+  --ink: #292929;
+  --line: #252525;
+  --muted: #d9dadd;
+  --accent: #72cbd0;
+}
 
-    body {
-      min-height: 100vh;
-      background: #f5f6f7;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #242424;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    .login-card {
-      width: 100%;
-      max-width: 440px;
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 22px rgba(0, 0, 0, 0.07);
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 26px 12px;
+  background: #f5f5f5;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .top-line {
-      height: 5px;
-      background: #00a6c7;
-    }
+.top-accent {
+  position: fixed;
+  top: 0;
+  left: 2.5%;
+  width: 95%;
+  height: 9px;
+  background: #d9f1f2;
+  border: 2px solid var(--accent);
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+}
 
-    .content {
-      padding: 34px 32px 30px;
-    }
+.login-card {
+  width: min(100%, 760px);
+  background: #fff;
+  border-radius: 22px;
+  padding: 58px 54px 42px;
+  box-shadow: 0 9px 24px rgba(0,0,0,.12);
+  border: 1px solid #f0f0f0;
+}
 
-    h1 {
-      font-size: 29px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
+h1 {
+  margin: 0 0 30px;
+  text-align: center;
+  font-size: clamp(34px, 5vw, 46px);
+  font-weight: 700;
+}
 
-    .intro {
-      color: #555;
-      font-size: 14px;
-      line-height: 1.55;
-      margin-bottom: 28px;
-    }
+.intro {
+  margin: 0 auto 76px;
+  text-align: center;
+  font-size: clamp(21px, 3.5vw, 31px);
+  line-height: 1.48;
+  max-width: 620px;
+}
 
-    .field {
-      margin-bottom: 21px;
-    }
+.field {
+  margin-bottom: 18px;
+}
 
-    .field-label {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 9px;
-    }
+.input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 66px;
+  border-bottom: 2px solid var(--line);
+  padding: 0 6px 7px;
+}
 
-    .input-wrap {
-      display: flex;
-      align-items: center;
-      height: 49px;
-      border: 1px solid #b9bdc1;
-      border-radius: 5px;
-      padding: 0 13px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
+.input-wrap svg {
+  width: 38px;
+  height: 42px;
+  flex: 0 0 38px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.65;
+}
 
-    .input-wrap:focus-within {
-      border-color: #008eaa;
-      box-shadow: 0 0 0 2px rgba(0, 166, 199, 0.12);
-    }
+.input-wrap input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-size: clamp(23px, 3.8vw, 31px);
+  color: var(--ink);
+}
 
-    .field-icon {
-      width: 20px;
-      height: 20px;
-      color: #555;
-      flex-shrink: 0;
-      margin-right: 11px;
-    }
+.input-wrap input::placeholder {
+  color: #303030;
+  opacity: 1;
+}
 
-    .input-wrap input {
-      width: 100%;
-      min-width: 0;
-      border: none;
-      outline: none;
-      background: transparent;
-      font-size: 15px;
-      color: #242424;
-    }
+.input-wrap:focus-within {
+  border-bottom-color: #159da7;
+}
 
-    .input-wrap input::placeholder {
-      color: #888;
-    }
+.help-link {
+  display: inline-block;
+  margin-top: 25px;
+  color: var(--ink);
+  font-size: clamp(17px, 2.8vw, 22px);
+  font-weight: 700;
+  text-decoration: underline;
+}
 
-    .field-footer {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 9px;
-    }
+.field + .field {
+  margin-top: 55px;
+}
 
-    .text-link {
-      color: #007f9b;
-      font-size: 13px;
-      text-decoration: none;
-      cursor: pointer;
-    }
+.submit {
+  width: 100%;
+  border: 0;
+  border-radius: 60px;
+  min-height: 100px;
+  margin-top: 94px;
+  background: var(--muted);
+  color: #777;
+  font-size: clamp(25px, 4vw, 34px);
+  font-weight: 700;
+  cursor: not-allowed;
+  transition: background .2s, color .2s;
+}
 
-    .text-link:hover {
-      text-decoration: underline;
-    }
+.submit.ready {
+  background: #d9f1f2;
+  color: #252525;
+  cursor: pointer;
+}
 
-    .login-button {
-      width: 100%;
-      height: 48px;
-      margin-top: 5px;
-      border: none;
-      border-radius: 5px;
-      background: #d9dadd;
-      color: #737373;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: not-allowed;
-      transition: background 0.2s, color 0.2s;
-    }
+.submit.ready:hover {
+  background: #bce8eb;
+}
 
-    .login-button.ready {
-      background: #ffd400;
-      color: #222;
-      cursor: pointer;
-    }
+.create {
+  display: block;
+  text-align: center;
+  margin-top: 57px;
+  color: var(--ink);
+  font-size: clamp(21px, 3.2vw, 27px);
+  font-weight: 700;
+  text-decoration: underline;
+}
 
-    .login-button.ready:hover {
-      background: #f2c900;
-    }
+.notice {
+  display: none;
+  margin: 20px 0 0;
+  padding: 12px 14px;
+  background: #f2fbfb;
+  border: 1px solid #b7e2e4;
+  border-radius: 10px;
+  line-height: 1.45;
+  font-size: 14px;
+}
 
-    .create-account {
-      text-align: center;
-      margin-top: 23px;
-      font-size: 14px;
-    }
+.notice.show {
+  display: block;
+}
 
-    .create-account a {
-      color: #007f9b;
-      text-decoration: none;
-      font-weight: 700;
-    }
+@media (max-width: 600px) {
+  body {
+    padding: 20px 7px;
+    align-items: flex-start;
+  }
 
-    .create-account a:hover {
-      text-decoration: underline;
-    }
+  .login-card {
+    padding: 42px 24px 34px;
+    border-radius: 18px;
+    margin-top: 18px;
+  }
 
-    .notice {
-      margin-top: 22px;
-      padding-top: 15px;
-      border-top: 1px solid #ececec;
-      color: #777;
-      font-size: 11px;
-      line-height: 1.5;
-      text-align: center;
-    }
+  .intro {
+    margin-bottom: 54px;
+  }
 
-    .message {
-      display: none;
-      margin-top: 15px;
-      font-size: 13px;
-      line-height: 1.4;
-      text-align: center;
-      color: #555;
-    }
+  .input-wrap {
+    gap: 13px;
+    min-height: 60px;
+  }
 
-    .message.show {
-      display: block;
-    }
+  .input-wrap svg {
+    width: 32px;
+    height: 36px;
+    flex-basis: 32px;
+  }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 14px;
-        align-items: flex-start;
-        padding-top: 35px;
-      }
+  .field + .field {
+    margin-top: 42px;
+  }
 
-      .login-card {
-        max-width: 360px;
-        margin: 0 auto;
-      }
+  .submit {
+    min-height: 78px;
+    margin-top: 65px;
+  }
 
-      .content {
-        padding: 27px 22px 24px;
-      }
-
-      h1 {
-        font-size: 26px;
-      }
-
-      .intro {
-        font-size: 13px;
-        margin-bottom: 23px;
-      }
-
-      .input-wrap {
-        height: 45px;
-      }
-
-      .login-button {
-        height: 43px;
-      }
-    }
-  </style>
+  .create {
+    margin-top: 42px;
+  }
+}
+</style>
 </head>
 
 <body>
-  <main class="login-card">
-    <div class="top-line"></div>
 
-    <div class="content">
-      <h1>¡Hola!</h1>
+<div class="top-accent" aria-hidden="true"></div>
 
-      <p class="intro">
-        Ingresa los angel datos para gestionar tus productos y hacer transacciones.
-      </p>
+<main class="login-card">
+  <h1>¡Hola!</h1>
 
-      <form id="loginForm" autocomplete="off">
-        <div class="field">
-          <label class="field-label" for="usuario">Usuario</label>
+  <p class="intro">
+    Ingresa los datos para gestionar tus productos y hacer transacciones.
+  </p>
 
-          <div class="input-wrap">
-            <svg class="field-icon" viewBox="0 0 24 24"
-                 fill="none" stroke="currentColor"
-                 stroke-width="1.7" aria-hidden="true">
-              <circle cx="12" cy="8" r="4"></circle>
-              <path d="M4 21v-2a8 8 0 0 1 16 0v2"></path>
-            </svg>
+  <form id="demoForm" autocomplete="off">
 
-            <input
-              id="usuario"
-              name="usuario"
-              type="text"
-              placeholder="Ingresa tu usuario"
-              autocomplete="off"
-            >
-          </div>
+    <div class="field">
+      <label class="input-wrap" for="usuario">
+        <svg viewBox="0 0 40 44" aria-hidden="true">
+          <circle cx="20" cy="12" r="8"></circle>
+          <path d="M5 39v-4c0-7 6-11 15-11s15 4 15 11v4z"></path>
+        </svg>
 
-          <div class="field-footer">
-            <a href="#" class="text-link" data-message="La recuperación de usuario es solo una demostración local.">
-              ¿Olvidaste tu usuario?
-            </a>
-          </div>
-        </div>
+        <input
+          id="usuario"
+          name="usuario"
+          type="text"
+          placeholder="Usuario"
+          aria-label="Usuario"
+          autocomplete="off"
+        >
+      </label>
 
-        <div class="field">
-          <label class="field-label" for="clave">Clave de 4 dígitos</label>
-
-          <div class="input-wrap">
-            <svg class="field-icon" viewBox="0 0 24 24"
-                 fill="none" stroke="currentColor"
-                 stroke-width="1.7" aria-hidden="true">
-              <rect x="4" y="10" width="16" height="11" rx="2"></rect>
-              <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
-              <circle cx="12" cy="15" r="1"></circle>
-            </svg>
-
-            <input
-              id="clave"
-              name="clave"
-              type="password"
-              inputmode="numeric"
-              pattern="[0-9]{4}"
-              maxlength="4"
-              placeholder="Ingresa tu clave"
-              autocomplete="off"
-              aria-describedby="clave-ayuda"
-            >
-          </div>
-
-          <div class="field-footer">
-            <a href="#" class="text-link" data-message="La recuperación de clave es solo una demostración local.">
-              ¿Olvidaste o bloqueaste tu clave?
-            </a>
-          </div>
-
-          <small id="clave-ayuda" style="display:block; color:#777; font-size:11px; margin-top:7px;">
-            Escribe cuatro números.
-          </small>
-        </div>
-
-        <button id="loginButton" class="login-button" type="submit" disabled>
-          Iniciar sesión
-        </button>
-
-        <p id="message" class="message" role="status"></p>
-
-        <div class="create-account">
-          ¿No tienes usuario?
-          <a href="#" data-message="La creación de usuario es solo una demostración local.">
-            Crear usuario
-          </a>
-        </div>
-
-        <p class="notice">
-          Demostración de interfaz. No se envían ni se guardan usuarios o claves.
-        </p>
-      </form>
+      <a
+        class="help-link"
+        href="#ayuda-usuario"
+        data-message="Esta es una maqueta. La recuperación de usuario no está conectada a ningún servicio."
+      >¿Olvidaste tu usuario?</a>
     </div>
-  </main>
 
-  <script>
-    const usuario = document.getElementById("usuario");
-    const clave = document.getElementById("clave");
-    const loginButton = document.getElementById("loginButton");
-    const loginForm = document.getElementById("loginForm");
-    const message = document.getElementById("message");
+    <div class="field">
+      <label class="input-wrap" for="clave">
+        <svg viewBox="0 0 40 44" aria-hidden="true">
+          <rect x="7" y="18" width="26" height="23" rx="8"></rect>
+          <path d="M11 18V12a9 9 0 0 1 18 0v6"></path>
+          <circle cx="20" cy="28" r="2.5"></circle>
+          <path d="M20 30.5v4"></path>
+        </svg>
 
-    function actualizarBoton() {
-      // Se activa al ingresar cuatro dígitos, conservando ceros iniciales.
-      const claveValida = /^[0-9]{4}$/.test(clave.value);
+        <input
+          id="clave"
+          name="clave"
+          type="password"
+          inputmode="numeric"
+          maxlength="4"
+          pattern="[0-9]{4}"
+          placeholder="Clave del cajero"
+          aria-label="Clave de demostración de cuatro dígitos"
+          autocomplete="off"
+        >
+      </label>
 
-      loginButton.classList.toggle("ready", claveValida);
-      loginButton.disabled = !claveValida;
-    }
+      <a
+        class="help-link"
+        href="#ayuda-clave"
+        data-message="Esta es una maqueta. La recuperación o el desbloqueo de clave no están conectados a ningún servicio."
+      >¿Olvidaste o bloqueaste tu clave?</a>
+    </div>
 
-    clave.addEventListener("input", () => {
-      // Acepta únicamente números y limita la longitud a cuatro.
-      clave.value = clave.value.replace(/[^0-9]/g, "").slice(0, 4);
-      actualizarBoton();
-    });
+    <button class="submit" id="submitBtn" type="submit" disabled>
+      Iniciar sesión
+    </button>
 
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+    <p class="notice" id="notice" role="status"></p>
 
-      message.textContent =
-        "Esta es una demostración visual. No se ha iniciado sesión ni enviado información.";
-      message.classList.add("show");
-    });
+  </form>
 
-    document.querySelectorAll("[data-message]").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        message.textContent = link.dataset.message;
-        message.classList.add("show");
-      });
-    });
+  <a class="create" href="#crear" id="createLink">
+    Crear usuario
+  </a>
+</main>
 
-    actualizarBoton();
-  </script>
+<script>
+const usuario = document.getElementById("usuario");
+const clave = document.getElementById("clave");
+const submitBtn = document.getElementById("submitBtn");
+const notice = document.getElementById("notice");
+const demoForm = document.getElementById("demoForm");
+
+function actualizarBoton() {
+  const usuarioCompleto = usuario.value.trim().length > 0;
+  const claveCompleta = /^[0-9]{4}$/.test(clave.value);
+
+  const listo = usuarioCompleto && claveCompleta;
+
+  submitBtn.disabled = !listo;
+  submitBtn.classList.toggle("ready", listo);
+}
+
+function mostrarAviso(texto) {
+  notice.textContent = texto;
+  notice.classList.add("show");
+}
+
+usuario.addEventListener("input", actualizarBoton);
+
+clave.addEventListener("input", function() {
+  // Conserva los ceros iniciales y admite únicamente cuatro dígitos.
+  clave.value = clave.value.replace(/[^0-9]/g, "").slice(0, 4);
+  actualizarBoton();
+});
+
+demoForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  mostrarAviso(
+    "Demostración local: el inicio de sesión no está conectado y no se enviaron datos."
+  );
+});
+
+document.querySelectorAll("[data-message]").forEach(function(link) {
+  link.addEventListener("click", function(event) {
+    event.preventDefault();
+    mostrarAviso(this.dataset.message);
+  });
+});
+
+document.getElementById("createLink").addEventListener("click", function(event) {
+  event.preventDefault();
+
+  mostrarAviso(
+    "Demostración local: la creación de usuario no está conectada a ningún servicio."
+  );
+});
+
+actualizarBoton();
+</script>
+
 </body>
 </html>
 ```
