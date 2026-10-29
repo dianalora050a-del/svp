@@ -10,6 +10,7 @@
   --ink: #292929;
   --line: #252525;
   --muted: #d9dadd;
+  --yellow: #ffdc00;
 }
 
 * {
@@ -127,13 +128,13 @@ h1 {
 }
 
 .submit.ready {
-  background: #d9dadd;
+  background: var(--yellow);
   color: #252525;
   cursor: pointer;
 }
 
 .submit.ready:hover {
-  background: #c8c9cc;
+  background: #f2cd00;
 }
 
 .create {
@@ -235,7 +236,7 @@ h1 {
       <a
         class="help-link"
         href="#ayuda-usuario"
-        data-message="Esta es una maqueta de demostración. La recuperación de usuario no está conectada a ningún servicio."
+        data-message="Demostración local: la recuperación de usuario no está conectada a ningún servicio."
       >¿Olvidaste tu usuario?</a>
     </div>
 
@@ -264,7 +265,7 @@ h1 {
       <a
         class="help-link"
         href="#ayuda-clave"
-        data-message="Esta es una maqueta de demostración. La recuperación o el desbloqueo de clave no están conectados a ningún servicio."
+        data-message="Demostración local: la recuperación o el desbloqueo de clave no están conectados a ningún servicio."
       >¿Olvidaste o bloqueaste tu clave?</a>
     </div>
 
@@ -273,6 +274,7 @@ h1 {
     </button>
 
     <p class="notice" id="notice" role="status"></p>
+
   </form>
 
   <a class="create" href="#crear" id="createLink">
@@ -288,12 +290,11 @@ const notice = document.getElementById("notice");
 const demoForm = document.getElementById("demoForm");
 
 function actualizarBoton() {
-  const usuarioCompleto = usuario.value.trim().length > 0;
+  // El botón depende únicamente de que haya exactamente cuatro dígitos.
   const claveCompleta = /^[0-9]{4}$/.test(clave.value);
-  const listo = usuarioCompleto && claveCompleta;
 
-  submitBtn.disabled = !listo;
-  submitBtn.classList.toggle("ready", listo);
+  submitBtn.disabled = !claveCompleta;
+  submitBtn.classList.toggle("ready", claveCompleta);
 }
 
 function mostrarAviso(texto) {
@@ -301,9 +302,8 @@ function mostrarAviso(texto) {
   notice.classList.add("show");
 }
 
-usuario.addEventListener("input", actualizarBoton);
-
 clave.addEventListener("input", function() {
+  // Permite números y conserva ceros iniciales, como 0123.
   clave.value = clave.value.replace(/[^0-9]/g, "").slice(0, 4);
   actualizarBoton();
 });
@@ -331,6 +331,7 @@ document.getElementById("createLink").addEventListener("click", function(event) 
   );
 });
 
+// Comprueba el estado inicial del botón.
 actualizarBoton();
 </script>
 
