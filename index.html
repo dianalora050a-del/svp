@@ -11,7 +11,6 @@
   --ink: #292929;
   --line: #252525;
   --muted: #d9dadd;
-  --accent: #72cbd0;
 }
 
 * {
@@ -28,18 +27,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.top-accent {
-  position: fixed;
-  top: 0;
-  left: 2.5%;
-  width: 95%;
-  height: 9px;
-  background: #d9f1f2;
-  border: 2px solid var(--accent);
-  border-top: 0;
-  border-radius: 0 0 18px 18px;
 }
 
 .login-card {
@@ -105,7 +92,7 @@ h1 {
 }
 
 .input-wrap:focus-within {
-  border-bottom-color: #159da7;
+  border-bottom-color: #555;
 }
 
 .help-link {
@@ -115,6 +102,11 @@ h1 {
   font-size: clamp(17px, 2.8vw, 22px);
   font-weight: 700;
   text-decoration: underline;
+}
+
+.help-link:hover,
+.create:hover {
+  opacity: .75;
 }
 
 .field + .field {
@@ -136,13 +128,13 @@ h1 {
 }
 
 .submit.ready {
-  background: #d9f1f2;
+  background: #d9dadd;
   color: #252525;
   cursor: pointer;
 }
 
 .submit.ready:hover {
-  background: #bce8eb;
+  background: #c8c9cc;
 }
 
 .create {
@@ -159,8 +151,8 @@ h1 {
   display: none;
   margin: 20px 0 0;
   padding: 12px 14px;
-  background: #f2fbfb;
-  border: 1px solid #b7e2e4;
+  background: #f7f7f7;
+  border: 1px solid #dedede;
   border-radius: 10px;
   line-height: 1.45;
   font-size: 14px;
@@ -215,8 +207,6 @@ h1 {
 
 <body>
 
-<div class="top-accent" aria-hidden="true"></div>
-
 <main class="login-card">
   <h1>¡Hola!</h1>
 
@@ -246,7 +236,7 @@ h1 {
       <a
         class="help-link"
         href="#ayuda-usuario"
-        data-message="Esta es una maqueta. La recuperación de usuario no está conectada a ningún servicio."
+        data-message="Esta es una maqueta de demostración. La recuperación de usuario no está conectada a ningún servicio."
       >¿Olvidaste tu usuario?</a>
     </div>
 
@@ -275,7 +265,7 @@ h1 {
       <a
         class="help-link"
         href="#ayuda-clave"
-        data-message="Esta es una maqueta. La recuperación o el desbloqueo de clave no están conectados a ningún servicio."
+        data-message="Esta es una maqueta de demostración. La recuperación o el desbloqueo de clave no están conectados a ningún servicio."
       >¿Olvidaste o bloqueaste tu clave?</a>
     </div>
 
@@ -284,7 +274,6 @@ h1 {
     </button>
 
     <p class="notice" id="notice" role="status"></p>
-
   </form>
 
   <a class="create" href="#crear" id="createLink">
@@ -302,7 +291,6 @@ const demoForm = document.getElementById("demoForm");
 function actualizarBoton() {
   const usuarioCompleto = usuario.value.trim().length > 0;
   const claveCompleta = /^[0-9]{4}$/.test(clave.value);
-
   const listo = usuarioCompleto && claveCompleta;
 
   submitBtn.disabled = !listo;
@@ -317,7 +305,6 @@ function mostrarAviso(texto) {
 usuario.addEventListener("input", actualizarBoton);
 
 clave.addEventListener("input", function() {
-  // Conserva los ceros iniciales y admite únicamente cuatro dígitos.
   clave.value = clave.value.replace(/[^0-9]/g, "").slice(0, 4);
   actualizarBoton();
 });
